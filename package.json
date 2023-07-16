@@ -18,7 +18,8 @@
     "pdf-lib": "^1.17.1",
     "pdf-parse": "^1.1.1",
     "pdf2json": "^3.0.4",
-    "pdfjs-dist": "^3.8.162"
+    "pdfjs-dist": "^3.8.162",
+    "pdfreader": "^3.0.0"
   },
   "devDependencies": {
     "esm": "^3.2.25"
