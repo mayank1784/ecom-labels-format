@@ -1,5 +1,5 @@
 import { PdfReader } from "pdfreader";
-import fs from 'fs';
+import fs from "fs";
 let text = "";
 const pdfPath = "./public/input/amatest2.pdf";
 const pdfData = fs.readFileSync(pdfPath);

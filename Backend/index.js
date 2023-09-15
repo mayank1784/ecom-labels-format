@@ -39,10 +39,8 @@ function filterArrayBySKUIDAmazon(arr) {
       tempFilteredArray.push(substring);
       if (qty != null) qty = qty[qty.length - 1];
       tempFilteredArray.push(qty);
-     
     }
     filteredArray.push(tempFilteredArray);
-    
   }
   console.log(filteredArray);
   const cleanedArray = filteredArray
@@ -113,24 +111,27 @@ async function sortPDFPagesByLine(pdfPath, platform) {
         pageNumber - 1, // Adjust the page number by subtracting 1
       ]);
       sortedPdf.addPage(existingPage);
-      if (platform==="amazon"){
-      const pageIndex = Math.floor((pageNumber - 1) / 2); // Adjust index for pageTexts
-      const text = pageTexts[pageIndex].join(" :: "); // Get the corresponding text from pageTexts
+      if (platform === "amazon") {
+        const pageIndex = Math.floor((pageNumber - 1) / 2); // Adjust index for pageTexts
+        const text = pageTexts[pageIndex].join(" :: "); // Get the corresponding text from pageTexts
 
-      const timesRomanBoldFont = await sortedPdf.embedFont(StandardFonts.TimesRomanBold)
-      const { width, height } = existingPage.getSize();
-      const fontSize = 16;
-      const textX = 50;
-      const textY = 150;
+        const timesRomanBoldFont = await sortedPdf.embedFont(
+          StandardFonts.TimesRomanBold
+        );
+        const { width, height } = existingPage.getSize();
+        const fontSize = 16;
+        const textX = 50;
+        const textY = 150;
 
-      const page = sortedPdf.getPages().pop(); // Get the last added page
-      page.drawText(text, {
-        x: textX,
-        y: textY,
-        size: fontSize,
-        font: timesRomanBoldFont,
-      });
-    }}
+        const page = sortedPdf.getPages().pop(); // Get the last added page
+        page.drawText(text, {
+          x: textX,
+          y: textY,
+          size: fontSize,
+          font: timesRomanBoldFont,
+        });
+      }
+    }
 
     // Save the sorted PDF to a new file
     const outputPath = "./public/output/fin2-out.pdf";
