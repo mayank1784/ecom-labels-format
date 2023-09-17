@@ -1,8 +1,14 @@
 const { PDFDocument, StandardFonts } = require("pdf-lib");
 const PDFParse = require("pdf-parse");
+
 const fs = require("fs");
 const ama = "Description";
 const other = "\n";
+function filterArrayBySKUIDFlip(arr){
+  const filteredArray = [];
+  const length = arr.length;
+
+}
 function filterArrayBySKUID(arr) {
   const filteredArray = [];
   const length = arr.length;
@@ -21,11 +27,11 @@ function filterArrayBySKUID(arr) {
 function filterArrayBySKUIDAmazon(arr) {
   let filteredArray = [];
   const length = arr.length;
-
+// console.log("aRR",arr);
   for (let i = 0; i < length; i++) {
     let temp = arr[i].split("HSN");
+    // console.log("HSN Split", temp);
 
-    //console.log("temp i: ",temp);
     const tempLength = temp.length;
     let tempFilteredArray = [];
     for (let j = 0; j < tempLength; j++) {
@@ -39,8 +45,10 @@ function filterArrayBySKUIDAmazon(arr) {
       tempFilteredArray.push(substring);
       if (qty != null) qty = qty[qty.length - 1];
       tempFilteredArray.push(qty);
+     
     }
     filteredArray.push(tempFilteredArray);
+    
   }
   console.log(filteredArray);
   const cleanedArray = filteredArray
@@ -69,6 +77,9 @@ async function sortPDFPagesByLine(pdfPath, platform) {
     console.log(pageCount);
     let pageTexts = [];
     const pageData = await PDFParse(pdfData);
+    // if (platform==="flip"){
+    //   console.log(pageData.text);
+    // }
     if (platform === "amazon") {
       lines = pageData.text.trim().split(ama);
     } else {
@@ -80,7 +91,7 @@ async function sortPDFPagesByLine(pdfPath, platform) {
     } else {
       pageTexts = filterArrayBySKUID(lines);
     }
-    console.log(pageTexts);
+    console.log(pageTexts);//Sku array 
     console.log("pageText len ", pageTexts.length);
     //Sort the page numbers based on the extracted text
     let sortedPageNumbers = [];
@@ -111,30 +122,27 @@ async function sortPDFPagesByLine(pdfPath, platform) {
         pageNumber - 1, // Adjust the page number by subtracting 1
       ]);
       sortedPdf.addPage(existingPage);
-      if (platform === "amazon") {
-        const pageIndex = Math.floor((pageNumber - 1) / 2); // Adjust index for pageTexts
-        const text = pageTexts[pageIndex].join(" :: "); // Get the corresponding text from pageTexts
+      if (platform==="amazon"){
+      const pageIndex = Math.floor((pageNumber - 1) / 2); // Adjust index for pageTexts
+      const text = pageTexts[pageIndex].join(" :: "); // Get the corresponding text from pageTexts
 
-        const timesRomanBoldFont = await sortedPdf.embedFont(
-          StandardFonts.TimesRomanBold
-        );
-        const { width, height } = existingPage.getSize();
-        const fontSize = 16;
-        const textX = 50;
-        const textY = 150;
+      const timesRomanBoldFont = await sortedPdf.embedFont(StandardFonts.TimesRomanBold)
+      const { width, height } = existingPage.getSize();
+      const fontSize = 16;
+      const textX = 50;
+      const textY = 150;
 
-        const page = sortedPdf.getPages().pop(); // Get the last added page
-        page.drawText(text, {
-          x: textX,
-          y: textY,
-          size: fontSize,
-          font: timesRomanBoldFont,
-        });
-      }
-    }
+      const page = sortedPdf.getPages().pop(); // Get the last added page
+      page.drawText(text, {
+        x: textX,
+        y: textY,
+        size: fontSize,
+        font: timesRomanBoldFont,
+      });
+    }}
 
     // Save the sorted PDF to a new file
-    const outputPath = "./public/output/fin2-out.pdf";
+    const outputPath = "./public/output/amazon_17-9.pdf";
     const sortedPdfBytes = await sortedPdf.save();
     fs.writeFileSync(outputPath, sortedPdfBytes);
 
@@ -145,5 +153,5 @@ async function sortPDFPagesByLine(pdfPath, platform) {
 }
 
 // Usage: Provide the path to the PDF file and the target line to sort by
-const pdfPath = "./public/input/amatest3.pdf";
+const pdfPath = "./public/input/amatest.pdf";
 sortPDFPagesByLine(pdfPath, "amazon");
