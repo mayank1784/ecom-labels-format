@@ -153,5 +153,5 @@ async function sortPDFPagesByLine(pdfPath, platform) {
 }
 
 // Usage: Provide the path to the PDF file and the target line to sort by
-const pdfPath = "./public/input/amatest.pdf";
+const pdfPath = "./public/input/ama_17.pdf";
 sortPDFPagesByLine(pdfPath, "amazon");

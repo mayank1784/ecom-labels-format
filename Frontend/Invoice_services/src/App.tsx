@@ -1,0 +1,10 @@
+import "./stylesheets/App.css";
+
+function App() {
+
+  return (
+    <div className='app'>App</div>
+  )
+}
+
+export default App
