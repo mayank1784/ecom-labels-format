@@ -230,9 +230,42 @@ async function sortPdf(req, res) {
   }
 }
 
+async function getPdfNames(req,res){
+  const uploadsFolderPath = path.join(__dirname, '..', 'public', 'uploads'); // Replace with the path to your uploads folder
 
+  // Read the files in the uploads folder
+  fs.readdir(uploadsFolderPath, (err, files) => {
+    const userId = req.user.uid;
+    if (err) {
+      console.error('Error reading directory:', err);
+      return res.status(500).json({ message: 'Error fetching files' });
+    }
+
+    // Filter files based on userId and get their stats
+    const filteredFiles = files.filter((file) => file.startsWith(userId));
+
+    // Create an array of file objects with name and birthtime
+    const fileObjects = filteredFiles.map((file) => {
+      const filePath = path.join(uploadsFolderPath, file);
+      const stats = fs.statSync(filePath);
+      return {
+        name: file,
+        birthtime: stats.birthtime,
+      };
+    });
+
+    // Sort the file objects by birthtime in descending order
+    const sortedFiles = fileObjects.sort((a, b) => b.birthtime - a.birthtime);
+
+    // Extract and send only the sorted file names
+    const sortedFileNames = sortedFiles.map((file) => file.name);
+
+    res.status(200).json(sortedFileNames);
+  });
+};
 
 module.exports = {
   mergePDFs,
   sortPdf,
+  getPdfNames,
 };

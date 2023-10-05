@@ -33,7 +33,6 @@ function FileUpload() {
       });
       setMessage(response.data.message);
       setUploadedPdfName(response.data.pdfName);
-    //   console.log('uploaded pdfs: ', response.data.pdf)
     } catch (error) {
       // Handle the error response from the server
       if (error.response && error.response.data) {
