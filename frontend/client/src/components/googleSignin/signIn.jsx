@@ -8,6 +8,7 @@ import FileUpload from "../FileUpload";
 function SignIn(){
     const [value,setValue] = useState('')
     const [fileNames, setFileNames] = useState([]);
+    
     const handleClick =async()=>{
         const result = await signInWithPopup(auth,provider);
         const {user} = result;
@@ -20,9 +21,7 @@ function SignIn(){
             }
       
     }
-    useEffect(()=>{
-      setValue(Cookies.get('sessionToken'));
-  },[setValue])
+   
     // API request to backend by authorised person where we will send session token in headers
     useEffect(() => {
       // Define a function to fetch file names
@@ -48,7 +47,7 @@ function SignIn(){
 
 return (
     <div>
-        
+        <h1>{value}</h1>
         <button onClick={handleClick}>Signin With Google</button>
       {/* <button onClick={getData}> get authorised data</button>
       {data!='' ? <h3>{data}</h3> : <></>} */}
