@@ -6,7 +6,7 @@ const admin = require('firebase-admin');
 const cookieParser = require("cookie-parser");
 // const authorize = require("./middlewares/auth.js");
 const login = require('./routes/loginRoute.js');
-const authtest = require('./routes/authtest.js');
+const fileRoute = require('./routes/fileRoute.js');
 // const { loginWithFirebase } = require('./controllers/authController');
 const app = express();
 
@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(cookieParser());
 // Routes
 app.use("/",login);
-app.use("/",authtest);
+app.use("/",fileRoute);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

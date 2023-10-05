@@ -1,5 +1,5 @@
 const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
-// const PDFParse = require("pdf-parse");
+const PDFParse = require("pdf-parse");
 // const pdfjs = require('pdfjs-dist');
 const PDFJS = require("pdfjs-dist/build/pdf.js");
 
@@ -146,7 +146,7 @@ async function sortPDFPagesByLine(pdfPath, platform) {
     }}
 
     // Save the sorted PDF to a new file
-    const outputPath = "./public/output/mee_30-9.pdf";
+    const outputPath = "./public/output/ama_5-10.pdf";
     const sortedPdfBytes = await sortedPdf.save();
     fs.writeFileSync(outputPath, sortedPdfBytes);
 
@@ -157,5 +157,5 @@ async function sortPDFPagesByLine(pdfPath, platform) {
 }
 
 // Usage: Provide the path to the PDF file and the target line to sort by
-const pdfPath = "./public/input/mee_30-9.pdf";
-sortPDFPagesByLine(pdfPath, "mee");
+const pdfPath = "./public/input/ama_5-10.pdf";
+sortPDFPagesByLine(pdfPath, "amazon");
