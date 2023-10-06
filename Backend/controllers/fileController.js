@@ -69,7 +69,7 @@ async function mergePDFs(req, res) {
     const pdfFiles = req.files; // Use 'pdfFiles' as the key to extract the array of files
 
     if (!pdfFiles) {
-      return res.status(400).json({ error: "No PDF files uploaded" });
+      return res.status(400).json({ message: "No PDF files uploaded" });
     }
 
     // Initialize a new PDF document

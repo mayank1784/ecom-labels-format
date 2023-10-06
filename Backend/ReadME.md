@@ -96,8 +96,19 @@ We provide the following API routes:
 - URL: `/api/upload`
 - Method: POST
 - Authentication: Required
-- Request Body: JSON Object
 
+#### Request
+
+**Headers:**
+
+- Authorization (String, Required): A JSON Web Token (JWT) for user authentication.
+- Content-Type (String, Required): Set to multipart/form-data to correctly handle file uploads.
+
+- *Body:*
+
+pdfFiles (File, Required): An array of PDF files to be uploaded. Maximum files 20 in a single request.
+
+*Example Request:*
 
 <details>
   <summary>Example Request (cURL)</summary>
@@ -151,45 +162,55 @@ axios.post('https://your-api-url.com/api/upload', formData, {
 
   </details>
 
+#### Response:
 
-**Request Body**
-- name (String, required): The user's full name.
-- email (String, required): The user's email address.
-- password (String, required): The user's password.
+- **Success Response (201 Created)**
 
-*Example Request Body:*
-
-```bash
-{
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "password": "securePassword123"
-}
-```
-
-*Response:*
-
-- Success Response (201 Created)
-
-   - message (String): "User registered successfully."
-   - data (Object):
-      - token (String): A JSON Web Token (JWT) for user authentication.
-      - user (Object): The registered user's details, including the `_id`, `name`, and `email`.
+   - `message (String):` "PDF uploaded successfully."
+   - `pdfName (String):` The server side name of the uploaded PDF file.
 
 *Example Response:*
 
-```bash
+```json
 {
-  "success": true,
-  "message": "User registered successfully",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiIsIn...",
-    "user": {
-      "_id": "5fbb6ea6a12b3456cd2de",
-      "name": "John Doe",
-      "email": "johndoe@example.com"
-    }
-  }
+  "message": "PDF uploaded successfully",
+  "pdfName": "user12345_merged_1633687423764.pdf"
+}
+```
+
+- **Error Response (400 Bad Request):**
+  
+  - `message (String):` "No PDF files uploaded." (If no files are provided in the request)
+
+*Example Error Response:*
+
+```json
+{
+  "message": "No PDF files uploaded"
+}
+```
+
+- **Error Response (401 Unauthorized):**
+  
+  - `message (String):` "Unauthorized" (If the provided JWT token is invalid or missing).
+
+*Example Error Response:*
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+- **Error Response (500 Internal Server Error):**
+  
+  - `message (String):`  "Error merging and saving PDFs" (If there is an internal server error during the upload process).
+
+*Example Error Response:*
+
+```json
+{
+  "message": "Error merging and saving PDFs"
 }
 ```
 
