@@ -97,7 +97,7 @@ We provide the following API routes:
 - Method: POST
 - Authentication: Required
 
-#### Request
+### Request
 
 **Headers:**
 
@@ -106,7 +106,7 @@ We provide the following API routes:
 
 - *Body:*
 
-pdfFiles (File, Required): An array of PDF files to be uploaded. Maximum files 20 in a single request.
+   - pdfFiles (File, Required): An array of PDF files to be uploaded. Maximum files 20 in a single request.
 
 *Example Request:*
 
@@ -162,7 +162,7 @@ axios.post('https://your-api-url.com/api/upload', formData, {
 
   </details>
 
-#### Response:
+### Response:
 
 - **Success Response (201 Created)**
 
