@@ -146,7 +146,7 @@ async function sortPDFPagesByLine(pdfPath, platform) {
     }}
 
     // Save the sorted PDF to a new file
-    const outputPath = "./public/output/ama_5-10.pdf";
+    const outputPath = "./public/output/mee_6-10.pdf";
     const sortedPdfBytes = await sortedPdf.save();
     fs.writeFileSync(outputPath, sortedPdfBytes);
 
@@ -157,5 +157,5 @@ async function sortPDFPagesByLine(pdfPath, platform) {
 }
 
 // Usage: Provide the path to the PDF file and the target line to sort by
-const pdfPath = "./public/input/ama_5-10.pdf";
-sortPDFPagesByLine(pdfPath, "amazon");
+const pdfPath = "./public/input/mee_6-10.pdf";
+sortPDFPagesByLine(pdfPath, "flip");

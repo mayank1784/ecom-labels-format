@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require("path");
@@ -15,7 +17,7 @@ const fileRoute = require('./routes/fileRoute.js');
 const app = express();
 
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/pdf_arranger', {
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -55,11 +57,11 @@ cleanupFolder2(folder2Path, cleanupInterval2);
 // Set up intervals for ongoing cleanup
 setInterval(() => {
   cleanupFolder1(folder1Path, cleanupInterval1);
-}, cleanupInterval1);
+}, 60 * 1000);
 
 setInterval(() => {
   cleanupFolder2(folder2Path, cleanupInterval2);
-}, cleanupInterval2);
+}, 60 * 1000);
 
 console.log(`File cleanup script for ${folder1Path} started. Deleting files older than ${cleanupInterval1 / (60 * 1000)} minutes.`);
 console.log(`File cleanup script for ${folder2Path} started. Deleting files older than ${cleanupInterval2 / (60 * 1000)} minutes.`);

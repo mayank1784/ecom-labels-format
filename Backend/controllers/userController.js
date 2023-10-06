@@ -16,7 +16,7 @@ exports.loginUser = async (req, res) => {
       });
     }
     const sessionToken = jwt.sign({ user: userData }, process.env.JWT_SECRET);
-    res.json({ sessionToken });
+    res.status(200).json({ sessionToken });
   } catch (err) {
     console.error("Google Login Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
