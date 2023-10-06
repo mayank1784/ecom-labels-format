@@ -23,11 +23,16 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-exports.getUser = async(req,res) => {
-  try{
-    res.status(200).json(req.user);
-  }catch(err){
+exports.getUser = async (req, res) => {
+  try {
+    res
+      .status(200)
+      .json({
+        message: "User details retrieved successfully.",
+        data: req.user,
+      });
+  } catch (err) {
     console.error(err);
-    res.status(404).json({message: "User not found"});
+    res.status(404).json({ message: "User not found" });
   }
-}
+};

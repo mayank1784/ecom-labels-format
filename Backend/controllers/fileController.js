@@ -115,7 +115,6 @@ async function mergePDFs(req, res) {
   }
 }
 
-
 //Function to sort pdf on the given platform
 async function sortPdf(req, res) {
   const platform = req.params.platform;
@@ -230,15 +229,15 @@ async function sortPdf(req, res) {
   }
 }
 
-async function getPdfNames(req,res){
-  const uploadsFolderPath = path.join(__dirname, '..', 'public', 'uploads'); // Replace with the path to your uploads folder
+async function getPdfNames(req, res) {
+  const uploadsFolderPath = path.join(__dirname, "..", "public", "uploads"); // Replace with the path to your uploads folder
 
   // Read the files in the uploads folder
   fs.readdir(uploadsFolderPath, (err, files) => {
     const userId = req.user.uid;
     if (err) {
-      console.error('Error reading directory:', err);
-      return res.status(500).json({ message: 'Error fetching files' });
+      console.error("Error reading directory:", err);
+      return res.status(500).json({ message: "Error fetching files" });
     }
 
     // Filter files based on userId and get their stats
@@ -260,9 +259,14 @@ async function getPdfNames(req,res){
     // Extract and send only the sorted file names
     const sortedFileNames = sortedFiles.map((file) => file.name);
 
-    res.status(200).json(sortedFileNames);
+    res
+      .status(200)
+      .json({
+        message: "PDF names retrieved successfully",
+        data: sortedFileNames,
+      });
   });
-};
+}
 
 module.exports = {
   mergePDFs,
