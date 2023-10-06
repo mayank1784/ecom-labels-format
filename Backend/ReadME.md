@@ -15,10 +15,11 @@ This is the documentation for the Backend of **LabelSorters** web app, a RESTful
    - [PDF Processing](#PDF-Processing)
 4. [POST Routes Format](#POST-Routes-Format)
 5. [GET Routes Format](#GET-Routes-Format)
-5. [Security Measures](#security-measures)
-6. [Error Handling](#error-handling)
-7. [Technologies Used](#technologies-used)
-8. [Deployed Backend](#deployed-backend)
+6. [Security Measures](#security-measures)
+7. [Error Handling](#error-handling)
+8. [Technologies Used](#technologies-used)
+9. [Deployed Backend](#deployed-backend)
+10. [File Deletion Policy](#file-deletion-policy)
 
 ## Prerequisites
 
@@ -70,7 +71,7 @@ To start the server, use one of the following commands:
   ```bash
   npm run dev
   ```
-  By default, the server will run on port 8000. You can access the API at `http://localhost:3000/api`
+  By default, the server will run on port 8000. You can access the API at `http://localhost:8000/api`
 
 ## API Routes
 
@@ -115,7 +116,7 @@ We provide the following API routes:
 
 ```bash
 curl -X POST \
-  -H "Authorization: Bearer {your_jwt_token}" \
+  -H "Authorization: Bearer {sessionToken}" \
   -F "pdfFiles=@file1.pdf" \
   -F "pdfFiles=@file2.pdf" \
   https://your-api-url.com/api/upload
@@ -134,7 +135,7 @@ for (let i = 0; i < selectedFiles.length; i++) {
 fetch('https://your-api-url.com/api/upload', {
   method: 'POST',
   headers: {
-    'Authorization': `Bearer ${your_jwt_token}`
+    'Authorization': `Bearer ${sessionToken}`
   },
   body: formData
 })
@@ -153,7 +154,7 @@ for (let i = 0; i < selectedFiles.length; i++) {
 
 axios.post('https://your-api-url.com/api/upload', formData, {
   headers: {
-    'Authorization': `Bearer ${your_jwt_token}`,
+    'Authorization': `Bearer ${sessionToken}`,
     'Content-Type': 'multipart/form-data'
   }
 })
@@ -236,7 +237,7 @@ axios.post('https://your-api-url.com/api/upload', formData, {
 
 ```bash
 curl -X GET \
-  -H "Authorization: Bearer {your_jwt_token}" \
+  -H "Authorization: Bearer {sessionToken}" \
   https://your-api-url.com/api/getUser
 ```
 
@@ -248,7 +249,7 @@ curl -X GET \
 fetch('https://your-api-url.com/api/getUser', {
   method: 'GET',
   headers: {
-    'Authorization': `Bearer ${your_jwt_token}`
+    'Authorization': `Bearer ${sessionToken}`
   }
 })
   .then(response => response.json())
@@ -261,7 +262,7 @@ fetch('https://your-api-url.com/api/getUser', {
   ```bash
 axios.get('https://your-api-url.com/api/getUser', {
   headers: {
-    'Authorization': `Bearer ${your_jwt_token}`
+    'Authorization': `Bearer ${sessionToken}`
   }
 })
   .then(response => console.log(response.data))
@@ -335,7 +336,7 @@ axios.get('https://your-api-url.com/api/getUser', {
 
 ```bash
 curl -X GET \
-  -H "Authorization: Bearer {your_jwt_token}" \
+  -H "Authorization: Bearer {sessionToken}" \
   https://your-api-url.com/api/processedPdfNames
 ```
 
@@ -347,7 +348,7 @@ curl -X GET \
 fetch('https://your-api-url.com/api/processedPdfNames', {
   method: 'GET',
   headers: {
-    'Authorization': `Bearer ${your_jwt_token}`
+    'Authorization': `Bearer ${sessionToken}`
   }
 })
   .then(response => response.json())
@@ -360,7 +361,7 @@ fetch('https://your-api-url.com/api/processedPdfNames', {
   ```bash
 axios.get('https://your-api-url.com/api/processedPdfNames', {
   headers: {
-    'Authorization': `Bearer ${your_jwt_token}`
+    'Authorization': `Bearer ${sessionToken}`
   }
 })
   .then(response => console.log(response.data))
@@ -450,7 +451,7 @@ https://your-api-url.com/api/process-pdf/amazon/user12345_merged_1633687423764.p
 *Example Response Headers:*
 
 ```bash
-Content-Disposition: attachment; filename=processed.pdf
+Content-Disposition: attachment; filename=user12345_merged_1633687423764_sorted_platform.pdf
 Content-Type: application/pdf
 ```
 
@@ -464,18 +465,6 @@ Content-Type: application/pdf
 ```json
 {
   "message": "Unauthorized"
-}
-```
-
-- **Error Response (404 Not Found):**
-  
-  - `message (String):` "Processed PDF not found" (If the processed PDF file does not exist).
-
-*Example Error Response:*
-
-```json
-{
-  "message": "Processed PDF not found"
 }
 ```
 
@@ -516,6 +505,17 @@ The backend is not yet deployed.
 
 
 To access the API routes when cloned locally, you can use tools like [Postman](https://www.postman.com/) or make `HTTP` requests from your frontend application by running the server.
+
+## File Deletion Policy
+
+In order to maintain data privacy and optimize storage resources, our API follows a file deletion policy for both uploaded and processed files:
+
+- **Uploaded Files:** Any files that are uploaded to our system, such as PDF documents, are retained for a maximum of 30 minutes. After this duration, these files are automatically deleted from our servers.
+
+- **Processed Files:** Once a PDF document has been processed and a modified version has been generated, the processed files are retained for a maximum of 5 minutes. After this duration, these files are also automatically deleted from our servers.
+
+This file deletion policy ensures that files are only stored temporarily and are promptly removed from our servers once they are no longer needed. Users can be confident that their data is handled with privacy and efficiency in mind.
+
 
 If you have any questions or need further assistance, please don't hesitate to reach out.
 

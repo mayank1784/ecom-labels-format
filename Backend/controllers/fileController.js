@@ -119,6 +119,7 @@ async function mergePDFs(req, res) {
 async function sortPdf(req, res) {
   const platform = req.params.platform;
   const pdfName = req.params.pdfName;
+  const outputPdfName = `${pdfName.substring(0,pdfName.lastIndexOf(".pdf"))}_sorted_${platform}.pdf`;
   // Define the paths to the merged PDF and the output PDF
   const foundPdf = path.join(__dirname, "..", "public", "uploads", pdfName);
   const outputPath = path.join(
@@ -126,16 +127,13 @@ async function sortPdf(req, res) {
     "..",
     "public",
     "output",
-    `${pdfName.substring(
-      0,
-      pdfName.lastIndexOf(".pdf")
-    )}_sorted_${platform}.pdf`
+    outputPdfName
   );
 
   // Check if a processed PDF already exists
   if (fs.existsSync(outputPath)) {
     // If it exists, send it for download
-    res.setHeader("Content-Disposition", `attachment; filename=downloaded.pdf`);
+    res.setHeader("Content-Disposition", `attachment; filename=${outputPdfName}`);
     res.setHeader("Content-Type", "application/pdf");
     const downloadPdfStream = fs.createReadStream(downloadPath);
     downloadPdfStream.pipe(res);
@@ -219,7 +217,7 @@ async function sortPdf(req, res) {
     const sortedPdfBytes = await sortedPdf.save();
     fs.writeFileSync(outputPath, sortedPdfBytes);
     // Send the modified PDF as a downloadable response
-    res.setHeader("Content-Disposition", `attachment; filename=processed.pdf`);
+    res.setHeader("Content-Disposition", `attachment; filename=${outputPdfName}`);
     res.setHeader("Content-Type", "application/pdf");
     const modifiedPdfStream = fs.createReadStream(outputPath);
     modifiedPdfStream.pipe(res);
