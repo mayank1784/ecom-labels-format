@@ -42,7 +42,7 @@ git clone https://github.com/mayank1784/ecom-labels-format.git
 In the `Backend` directory, make a `.env` file .
 Update the variables in `.env` with your specific configuration details.
 
-Here's an example of config.env:
+Here's an example of .env:
 
 ```bash
 DB_URL='mongodb://127.0.0.1:27017/pdf_arranger'
@@ -418,7 +418,7 @@ axios.get('https://your-api-url.com/api/processedPdfNames', {
 - Method: GET
 - Authentication: Required
 
-**Description**
+**Description:**
 This endpoint processes a PDF file based on the provided platform and initiates an automatic download of the processed PDF file.
 If the processed file already exists, it is sent for download with appropriate headers. If not, the PDF is processed, sorted,
 and the sorted file is sent for download.
