@@ -214,295 +214,281 @@ axios.post('https://your-api-url.com/api/upload', formData, {
 }
 ```
 
-### Log In as an Existing User
+## GET Routes Format
 
-- URL: `/api/v1/login`
-- Method: POST
-- Authentication: Not required
-- Request Body: JSON Object
+### Get User Details
 
-**Request Body**
-- email (String, required): The user's registered email address.
-- password (String, required): The user's password.
+- URL: `/api/getUser`
+- Method: GET
+- Authentication: Required
 
-*Example Request Body:*
+### Request
+
+**Headers:**
+
+- Authorization (String, Required): A JSON Web Token (JWT) for user authentication.
+
+
+*Example Request:*
+
+<details>
+  <summary>Example Request (cURL)</summary>
 
 ```bash
-{
-  "email": "johndoe@example.com",
-  "password": "securePassword123"
-}
+curl -X GET \
+  -H "Authorization: Bearer {your_jwt_token}" \
+  https://your-api-url.com/api/getUser
 ```
 
-*Response:*
-
-- Success Response (200 OK)
-
-   - message (String): "Login successful."
-   - data (Object):
-      - token (String): A JSON Web Token (JWT) for user authentication.
-      - user (Object): The authenticated user's details, including the `_id`, `name`, and `email`.
-
-
-*Example Response*
+</details>
+<details>
+  <summary>Example Request (fetch)</summary>
 
 ```bash
-{
-  "success": true,
-  "message": "Login successful",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1NiIsIn...",
-    "user": {
-      "_id": "5fbb6ea6a12b3456cd2de",
-      "name": "John Doe",
-      "email": "johndoe@example.com"
-    }
+fetch('https://your-api-url.com/api/getUser', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${your_jwt_token}`
   }
-}
+})
+  .then(response => response.json())
 ```
 
-### Request a Password Reset Link
+</details>
+<details>
+  <summary>Example Request (axios)</summary>
 
-- **URL:** `/api/v1/password/forgot`
-- **Method:** `POST`
-- **Authentication:** Not required
-- **Request Body:** JSON Object
+  ```bash
+axios.get('https://your-api-url.com/api/getUser', {
+  headers: {
+    'Authorization': `Bearer ${your_jwt_token}`
+  }
+})
+  .then(response => console.log(response.data))
+  ```
 
-**Request Body**
+  </details>
 
-- **email** (String, required): The email address associated with the user's account.
+### Response:
 
-*Example Request Body:*
+- **Success Response (200 OK)**
 
-```json
-{
-  "email": "johndoe@example.com"
-}
-```
-
-**Response:**
-
-- Success Response (200 OK)
-
-   - **message** (String): "Password reset email sent successfully."
-   - **data** (String): A message confirming that a password reset email has been sent to the provided email address.
+   - `message (String):` "User details retrieved successfully."
+   - `data (Object):` The user's details, including  `_id`, `uid`, `email`, `displayName`, `photoURL`.
 
 *Example Response:*
 
 ```json
 {
-  "success": true,
-  "message": "Password reset email sent successfully.",
-  "data": "Password reset email has been sent to johndoe@example.com"
+  "message": "User details retrieved successfully",
+  "data": {
+    "_id": "5fbb6ea6a12b3456cd2de",
+    "uid": "EWrIZH9ecLNBGYFCXw28h6afwcSr2",
+    "email": "johndoe@example.com",
+    "displayName": "John Doe",
+    "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocIPeQzGxz5o3f4EjC6rIxWPdWPrGYFctd2ztx1mfw=s96-c"
+  }
 }
 ```
 
-**Error Response:**
-
-- 404 Not Found
-
-   - **message** (String): "User not found with this email address."
-   - **data** (String): A message indicating that no user account was found with the provided email address.
+- **Error Response (401 Unauthorized):**
+  
+  - `message (String):` "Unauthorized" (If the provided JWT token is invalid or missing).
 
 *Example Error Response:*
 
 ```json
 {
-  "success": false,
-  "message": "User not found with this email address.",
-  "data": "No user account found with the email address johndoe@example.com"
+  "message": "Unauthorized"
 }
 ```
 
-### Create a New Product (Admin)
+- **Error Response (404 Not Found):**
+  
+  - `message (String):`  "User not found" (If the user does not exist).
 
-- **URL:** `/api/v1/admin/product/new`
-- **Method:** `POST`
-- **Authentication:** Required (Admin Role)
-- **Request Body:** JSON Object
+*Example Error Response:*
 
-**Request Body**
+```json
+{
+  "message": "User not found"
+}
+```
 
-- **name** (String, required): The name of the product.
-- **description** (String, required): A detailed description of the product.
-- **price** (Number, required): The price of the product.
-- **category** (String, required): The category to which the product belongs.
-- **stock** (Number, required): The available stock quantity of the product.
-- **images** (Array of Objects, required): An array of image objects containing `public_id` and `url`.
+### Get PDF Names
 
-*Example Request Body:*
+- URL: `/api/processedPdfNames`
+- Method: GET
+- Authentication: Required
+
+### Request
+
+**Headers:**
+
+- Authorization (String, Required): A JSON Web Token (JWT) for user authentication.
+
+
+*Example Request:*
+
+<details>
+  <summary>Example Request (cURL)</summary>
 
 ```bash
+curl -X GET \
+  -H "Authorization: Bearer {your_jwt_token}" \
+  https://your-api-url.com/api/processedPdfNames
+```
+
+</details>
+<details>
+  <summary>Example Request (fetch)</summary>
+
+```bash
+fetch('https://your-api-url.com/api/processedPdfNames', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${your_jwt_token}`
+  }
+})
+  .then(response => response.json())
+```
+
+</details>
+<details>
+  <summary>Example Request (axios)</summary>
+
+  ```bash
+axios.get('https://your-api-url.com/api/processedPdfNames', {
+  headers: {
+    'Authorization': `Bearer ${your_jwt_token}`
+  }
+})
+  .then(response => console.log(response.data))
+  ```
+
+  </details>
+
+### Response:
+
+- **Success Response (200 OK)**
+
+   - `message (String):` "PDF names retrieved successfully."
+   - `data (Array of Strings):` An array of PDF file names uploaded by the user in the last 30 minutes.
+
+*Example Response:*
+
+```json
 {
-  "name": "Example Product",
-  "description": "This is an example product description.",
-  "price": 49.99,
-  "category": "Electronics",
-  "stock": 100,
-  "images": [
-    {
-      "public_id": "image1",
-      "url": "https://example.com/image1.jpg"
-    },
-    {
-      "public_id": "image2",
-      "url": "https://example.com/image2.jpg"
-    }
+  "message": "PDF names retrieved successfully",
+  "data": [
+    "user12345_merged_1633687423764.pdf",
+    "user12345_merged_1633687423765.pdf"
   ]
 }
 ```
 
-**Response:**
+- **Error Response (401 Unauthorized):**
+  
+  - `message (String):` "Unauthorized" (If the provided JWT token is invalid or missing).
 
-- Success Response (201 Created)
-
-   - **message** (String): "Product created successfully."
-   - **data** (Object): The newly created product's details, including the `_id`, `name`, `description`, `price`, `category`, `stock`, and `images`.
-
-*Example Response:*
+*Example Error Response:*
 
 ```json
 {
-  "success": true,
-  "message": "Product created successfully",
-  "data": {
-    "_id": "5fbb6ea6a12b3456cd2de",
-    "name": "Example Product",
-    "description": "This is an example product description.",
-    "price": 49.99,
-    "category": "Electronics",
-    "stock": 100,
-    "images": [
-      {
-        "public_id": "image1",
-        "url": "https://example.com/image1.jpg"
-      },
-      {
-        "public_id": "image2",
-        "url": "https://example.com/image2.jpg"
-      }
-    ]
-  }
+  "message": "Unauthorized"
 }
 ```
 
-### Place a New Order
+- **Error Response (500 Internal Server Error):**
+  
+  - `message (String):` "Error fetching files" (If there is an internal server error during the process).
 
-- **URL:** `/api/v1/order/new`
-- **Method:** `POST`
-- **Authentication:** Required (User)
-- **Request Body:** JSON Object
-
-**Request Body**
-
-- **shippingInfo** (Object, required): Shipping information.
-   - **address** (String, required): The shipping address.
-   - **city** (String, required): The city for shipping.
-   - **state** (String, required): The state for shipping.
-   - **country** (String, required): The country for shipping.
-   - **pincode** (Number, required): The postal code for shipping.
-   - **phoneNo** (String, required): The contact phone number for shipping.
-- **orderItems** (Array of Objects, required): An array of ordered items.
-   - **name** (String, required): The name of the product.
-   - **price** (Number, required): The price of the product.
-   - **quantity** (Number, required): The quantity of the product.
-   - **image** (String, required): The URL of the product image.
-   - **product** (String, required): The product ID.
-- **paymentInfo** (Object, required): Payment information.
-   - **id** (String, required): The payment ID.
-   - **status** (String, required): The payment status.
-- **paidAt** (Date, required): The date and time of payment.
-- **itemsPrice** (Number, required): The total price of ordered items.
-- **shippingPrice** (Number, required): The shipping price.
-- **totalPrice** (Number, required): The total order price.
-
-*Example Request Body:*
+*Example Error Response:*
 
 ```json
 {
-  "shippingInfo": {
-    "address": "123 Main St",
-    "city": "Cityville",
-    "state": "Stateville",
-    "country": "Countryland",
-    "pincode": 12345,
-    "phoneNo": "123-456-7890"
-  },
-  "orderItems": [
-    {
-      "name": "Example Product 1",
-      "price": 49.99,
-      "quantity": 2,
-      "image": "https://example.com/product1.jpg",
-      "product": "5fbb6ea6a12b3456cd2de"
-    },
-    {
-      "name": "Example Product 2",
-      "price": 29.99,
-      "quantity": 1,
-      "image": "https://example.com/product2.jpg",
-      "product": "5fbb6ea6a12b3456cd2df"
-    }
-  ],
-  "paymentInfo": {
-    "id": "payment123",
-    "status": "paid"
-  },
-  "paidAt": "2023-09-30T10:00:00Z",
-  "itemsPrice": 129.97,
-  "shippingPrice": 10.00,
-  "totalPrice": 139.97
+  "message": "Error fetching files"
 }
 ```
 
-**Response:**
+### Process PDF
 
-- Success Response (201 Created)
+- URL: `/api/process-pdf/:platform/:pdfName`
+- Method: GET
+- Authentication: Required
 
-   - **message** (String): "Order placed successfully."
-   - **data** (Object): The newly created order's details, including the `_id`, `shippingInfo`, `orderItems`, `paymentInfo`, `paidAt`, `itemsPrice`, `shippingPrice`, and `totalPrice`.
+**Description**
+This endpoint processes a PDF file based on the provided platform and initiates an automatic download of the processed PDF file.
+If the processed file already exists, it is sent for download with appropriate headers. If not, the PDF is processed, sorted,
+and the sorted file is sent for download.
 
-*Example Response:*
+**Parameters**
+- `platform` (String, Required): The platform to be used for sorting the PDF (e.g., "amazon" or "other").
+- `pdfName` (String, Required): The name of the PDF file to be sorted (PDF name should match the one in the server's uploads directory).
+
+### Request
+
+**Headers:**
+
+- Authorization (String, Required): A JSON Web Token (JWT) for user authentication.
+
+
+*Example Request:*
+
+```bash
+https://your-api-url.com/api/process-pdf/amazon/user12345_merged_1633687423764.pdf
+```
+
+### Response:
+
+- **Success Response (File Download)**
+
+  - The response contains the processed PDF file for automatic download.
+  - `Content-Disposition:` Attachment header to initiate automatic download.
+  - `Content-Type:` The file type of the downloaded PDF.
+
+*Example Response Headers:*
+
+```bash
+Content-Disposition: attachment; filename=processed.pdf
+Content-Type: application/pdf
+```
+
+
+- **Error Response (401 Unauthorized):**
+  
+  - `message (String):` "Unauthorized" (If the provided JWT token is invalid or missing).
+
+*Example Error Response:*
 
 ```json
 {
-  "success": true,
-  "message": "Order placed successfully",
-  "data": {
-    "_id": "5fbb6ea6a12b3456cd2df",
-    "shippingInfo": {
-      "address": "123 Main St",
-      "city": "Cityville",
-      "state": "Stateville",
-      "country": "Countryland",
-      "pincode": 12345,
-      "phoneNo": "123-456-7890"
-    },
-    "orderItems": [
-      {
-        "name": "Example Product 1",
-        "price": 49.99,
-        "quantity": 2,
-        "image": "https://example.com/product1.jpg",
-        "product": "5fbb6ea6a12b3456cd2de"
-      },
-      {
-        "name": "Example Product 2",
-        "price": 29.99,
-        "quantity": 1,
-        "image": "https://example.com/product2.jpg",
-        "product": "5fbb6ea6a12b3456cd2df"
-      }
-    ],
-    "paymentInfo": {
-      "id": "payment123",
-      "status": "paid"
-    },
-    "paidAt": "2023-09-30T10:00:00Z",
-    "itemsPrice": 129.97,
-    "shippingPrice": 10.00,
-    "totalPrice": 139.97
-  }
+  "message": "Unauthorized"
+}
+```
+
+- **Error Response (404 Not Found):**
+  
+  - `message (String):` "Processed PDF not found" (If the processed PDF file does not exist).
+
+*Example Error Response:*
+
+```json
+{
+  "message": "Processed PDF not found"
+}
+```
+
+
+- **Error Response (500 Internal Server Error):**
+  
+  - `message (String):` "Error processing PDF" (If there is an internal server error during the process).
+
+*Example Error Response:*
+
+```json
+{
+  "message": "Error processing PDF"
 }
 ```
 
