@@ -2,6 +2,7 @@
 
 This is the documentation for the Backend of **LabelSorters** web app, a RESTful API built using the MERN (MongoDB, Express.js, React.js, Node.js) and Firebase (for authentication ) stack. This API provides the backend functionality for the website, including user management and pdf processing and management
 
+
 ## Table of Contents
 
 1. [Prerequisites](#prerequisites)
@@ -44,7 +45,7 @@ Update the variables in `.env` with your specific configuration details.
 
 Here's an example of .env:
 
-```bash
+```env
 DB_URL='mongodb://127.0.0.1:27017/pdf_arranger'
 JWT_SECRET='your-secret-key'
 ```
@@ -126,7 +127,7 @@ curl -X POST \
 <details>
   <summary>Example Request (fetch)</summary>
 
-```bash
+```js
 const formData = new FormData();
 for (let i = 0; i < selectedFiles.length; i++) {
     formData.append('pdfFiles', selectedFiles[i]);
@@ -146,7 +147,7 @@ fetch('https://your-api-url.com/api/upload', {
 <details>
   <summary>Example Request (axios)</summary>
 
-  ```bash
+  ```js
   const formData = new FormData();
 for (let i = 0; i < selectedFiles.length; i++) {
     formData.append('pdfFiles', selectedFiles[i]);
@@ -245,7 +246,7 @@ curl -X GET \
 <details>
   <summary>Example Request (fetch)</summary>
 
-```bash
+```js
 fetch('https://your-api-url.com/api/getUser', {
   method: 'GET',
   headers: {
@@ -259,7 +260,7 @@ fetch('https://your-api-url.com/api/getUser', {
 <details>
   <summary>Example Request (axios)</summary>
 
-  ```bash
+  ```js
 axios.get('https://your-api-url.com/api/getUser', {
   headers: {
     'Authorization': `Bearer ${sessionToken}`
@@ -344,7 +345,7 @@ curl -X GET \
 <details>
   <summary>Example Request (fetch)</summary>
 
-```bash
+```js
 fetch('https://your-api-url.com/api/processedPdfNames', {
   method: 'GET',
   headers: {
@@ -358,7 +359,7 @@ fetch('https://your-api-url.com/api/processedPdfNames', {
 <details>
   <summary>Example Request (axios)</summary>
 
-  ```bash
+  ```js
 axios.get('https://your-api-url.com/api/processedPdfNames', {
   headers: {
     'Authorization': `Bearer ${sessionToken}`
@@ -436,7 +437,7 @@ and the sorted file is sent for download.
 
 *Example Request:*
 
-```bash
+```url
 https://your-api-url.com/api/process-pdf/amazon/user12345_merged_1633687423764.pdf
 ```
 
@@ -450,7 +451,7 @@ https://your-api-url.com/api/process-pdf/amazon/user12345_merged_1633687423764.p
 
 *Example Response Headers:*
 
-```bash
+```js
 Content-Disposition: attachment; filename=user12345_merged_1633687423764_sorted_platform.pdf
 Content-Type: application/pdf
 ```
