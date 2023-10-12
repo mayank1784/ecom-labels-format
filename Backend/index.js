@@ -2,8 +2,9 @@ const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
 const PDFParse = require("pdf-parse");
 // const pdfjs = require('pdfjs-dist');
 const PDFJS = require("pdfjs-dist/build/pdf.js");
+const { PDFNet } = require('@pdftron/pdfnet-node');
 
-const coordinates = [0, 0, 100, 100];
+
 
 const fs = require("fs");
 const ama = "Description";
@@ -146,9 +147,36 @@ async function sortPDFPagesByLine(pdfPath, platform) {
     }}
 
     // Save the sorted PDF to a new file
-    const outputPath = "./public/output/mee_6-10.pdf";
+    const outputPath = "./public/output/ama_12.pdf";
     const sortedPdfBytes = await sortedPdf.save();
     fs.writeFileSync(outputPath, sortedPdfBytes);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+  //   await PDFNet.initialize("demo:1696681505415:7cef259c0300000000284d26b8d9353df9ad931f1d36c1c432b6231b2d");
+  //   try{
+  //     const doc = await PDFNet.PDFDoc.createFromFilePath(outputPath);
+  //     const flipcrop = {
+  //       x1: 187.90,
+  //       y1: 460.78,
+  //       x2: 405.4,
+  //       y2: 815.08
+  //     };
+  //     const meecrop = {
+  //       x1: 0,
+  //       y1: 434.18,
+  //       x2: 594.72,
+  //       y2: 841.68
+  //     }
+  //   const page_num = await doc.getPageCount();
+  // for (let i = 1; i <= page_num; ++i) {
+  //   const page = await doc.getPage(i);
+  //   page.setCropBox(new PDFNet.Rect(flipcrop.x1, flipcrop.y1, flipcrop.x2, flipcrop.y2));
+  // }
+  // await doc.save("./public/output/ama_12.pdf", PDFNet.SDFDoc.SaveOptions.e_linearized);
+  // console.log('PDF cropped successfully!');
+  // PDFNet.shutdown();
+  // } catch (err){console.error(err)} 
+/////////////////////////////////////////////////////////////////////////////////////////////////////  
 
     console.log(`PDF pages sorted and saved to ${outputPath}`);
   } catch (error) {
@@ -157,5 +185,5 @@ async function sortPDFPagesByLine(pdfPath, platform) {
 }
 
 // Usage: Provide the path to the PDF file and the target line to sort by
-const pdfPath = "./public/input/mee_6-10.pdf";
-sortPDFPagesByLine(pdfPath, "flip");
+const pdfPath = "./public/input/ama_12.pdf";
+sortPDFPagesByLine(pdfPath, "amazon");
