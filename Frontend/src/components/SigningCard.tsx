@@ -23,7 +23,7 @@ const SigningCard = ({ type }: propType) => {
                 <span>
                     {pageType}
                 </span>
-                <img className="SigningCard__logo" src={Logo} alt="" />
+                <img className="SigningCard__logo" src={Logo} alt="" width={"200px"} height={"200px"} />
                 <div className="SigningCard__button">
                     <BsGoogle className="SigningCard__googleLogo" size="16px" />
                     Continue with google</div>
