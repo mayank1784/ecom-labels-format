@@ -1,0 +1,78 @@
+@import "../stylesheets//Variables.scss";
+.SigningCard {
+  height: 100%;
+  width: 100%;
+  background-color: $background--color;
+  padding-top: 10vh;
+  .SigningCard__container {
+    // main div
+    margin: auto;
+    height: 400px;
+    width: 300px;
+    padding: 15px 10px 20px 10px;
+    border: 2px solid $border--color;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: inherit;
+    span {
+      font-family: Arial;
+      color: $text--black;
+      font-weight: 600;
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+    .SigningCard__logo {
+      margin-bottom: 20px;
+      border-radius: 50%;
+      // logo image
+    }
+    .SigningCard__button {
+      // Google redirect button
+      margin: 0px 7px 5px 7px;
+      padding: 7px 36px;
+      border-radius: 12px;
+      border: 2px solid $border--color;
+      font-family: sans-serif;
+      font-weight: 500;
+      color: $text--white;
+      font-size: 18px;
+      background-color: $backgroundAlt--color;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .SigningCard__googleLogo {
+        background-color: inherit;
+        padding-right: 12px;
+      }
+    }
+    .SigningCard__button:hover {
+      // Google redirect button
+      transition-duration: 100ms;
+      border: 2px solid $backgroundAlt--color;
+      color: $backgroundAlt--color;
+      background-color: $text--white;
+      .SigningCard__googleLogo {
+        background-color: inherit;
+      }
+    }
+    hr {
+      width: 85%;
+      margin: 13px 0px;
+    }
+    .SigningCard__fillerText {
+      font-family: sans-serif;
+      color: $text--black;
+      font-size: 14px;
+      padding: 0px 8px;
+      a {
+        text-decoration: none;
+        color: $backgroundAlt--color;
+        font-weight: 600;
+        // Remove the underline and change colour
+      }
+    }
+  }
+}

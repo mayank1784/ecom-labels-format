@@ -1,0 +1,45 @@
+.nav {
+  height: 7vh;
+  padding: 20px 20px 5px 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  font-size: 26px;
+  font-family: Tahoma;
+  background-color: $backgroundAlt--color;
+  .nav__logoImage {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    top: 15px;
+    left: 20px;
+  }
+  text {
+    @extend .navText--style;
+  }
+  .nav__logInText {
+    border: 1.5px solid $border--color;
+    color: $backgroundAlt--color;
+    background-color: $text--white;
+    border-radius: 10px;
+    padding: 5px 10px;
+  }
+  .nav__logInText:hover {
+    transition-duration: 100ms;
+    border-color: $background--color;
+    background-color: $backgroundAlt--color;
+    color: $background--color;
+  }
+  .nav__toolsDropdown {
+    @extend .navText--style;
+    margin-right: 30px;
+    display: flex; // slaps both at the top, text too
+    justify-content: center;
+    .nav__downArrow {
+      background-color: inherit;
+    }
+  }
+}
