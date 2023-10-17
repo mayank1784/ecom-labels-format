@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "../components/Navbar";
 import "../stylesheets/App.css";
-import wave from "../assets/wave.svg";
+import wave from "../assets/Footer.png";
 
 const Main = () => {
     return (

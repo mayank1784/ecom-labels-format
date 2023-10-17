@@ -7,22 +7,23 @@
   //   padding-top: 10vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
   .home__TextContainer {
     height: auto;
-    width: auto;
+    width: 43vw;
     display: flex;
     flex-direction: column;
     margin-top: 10vh;
+    margin-left: 4vw;
     .home__TitleText {
-      font-size: 40px;
+      font-size: 36px;
       font-family: Tahoma;
       color: $border--color;
     }
     .home__DescriptionText {
-      padding-top: 10px;
-      padding-left: 5px;
+      width: 40vw;
+      padding-top: 20px;
       font-size: 16px;
       font-family: Arial;
       color: $text--grey;
@@ -30,7 +31,7 @@
   }
   .home__MainImage {
     height: 40vh;
-    width: 50vw;
+    width: 40vw;
     object-fit: contain;
   }
 }

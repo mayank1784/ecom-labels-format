@@ -1,1 +1,73 @@
-/*# sourceMappingURL=Navbar.css.map */
+.nav {
+  height: 9vh;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  font-size: 26px;
+  font-family: Tahoma;
+  background-color: #04a7ab;
+}
+.nav .nav__logoImage {
+  position: absolute;
+  height: 4.26rem;
+  width: auto;
+  margin-bottom: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  top: 0px;
+  left: 20px;
+  cursor: pointer;
+  background-color: inherit;
+}
+.nav .nav__companyText {
+  position: absolute;
+  top: 23px;
+  left: 110px;
+  padding: 5px 3px;
+  margin-bottom: 20px;
+  font-family: Franklin Gothic Medium;
+  font-size: 1.6rem;
+  background-color: inherit;
+  color: #f3f3f3;
+  cursor: pointer;
+}
+.nav text:hover {
+  transition-duration: 200ms;
+  border-bottom: 5px solid #f3f3f3;
+}
+.nav .nav__logInText {
+  border: 1.5px solid #000000;
+  color: #04a7ab;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+.nav .nav__logInText:hover {
+  transition-duration: 100ms;
+  border-color: #ffffff;
+  background-color: #04a7ab;
+  color: #ffffff;
+}
+.nav .nav__toolsDropdown {
+  margin-right: 30px;
+  display: flex;
+  justify-content: center;
+}
+.nav .nav__toolsDropdown .nav__downArrow {
+  background-color: inherit;
+}
+
+.navText--style, .nav text, .nav .nav__toolsDropdown {
+  margin-right: 15px;
+  font-size: 1.09rem;
+  margin-top: 20px;
+  padding-right: 5px;
+  padding-bottom: 20px;
+  color: #f3f3f3;
+  background-color: inherit;
+  cursor: pointer;
+  border-bottom: 2px solid #04a7ab;
+}/*# sourceMappingURL=Navbar.css.map */

@@ -1,0 +1,97 @@
+@import "../stylesheets//Variables.scss";
+.pricing {
+  height: auto;
+  width: 100vw;
+  .pricing__cardContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    // native styles here
+    .pricecard {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: auto; //set in .tsx
+      width: 20vw;
+      margin: 0vw 3vw;
+      padding: 30px 25px;
+      border: 1px solid grey;
+      border-radius: 12px;
+      background-color: $backgroundAlt2--color;
+      text {
+        @extend .pricecard__textStyle;
+      }
+      .pricecard__planSubText {
+        font-size: 6px;
+        font-family: Arial;
+        padding-right: 72%;
+        padding-bottom: 5px;
+        color: $text--grey;
+        background-color: inherit;
+      }
+      .pricecard__planText {
+        font-size: 1rem;
+        width: 100%;
+        justify-content: flex-start;
+        color: $backgroundAlt--color;
+      }
+      .pricecard__priceText {
+        width: 100%;
+        justify-content: flex-start;
+        font-weight: bold;
+        .pricecard__priceSubText {
+          font-size: 10px;
+          font-weight: 500;
+          margin-left: 10px;
+          color: $text--grey;
+          background-color: inherit;
+        }
+      }
+      .pricecard__button {
+        font-family: Arial;
+        font-weight: 700;
+        font-size: 0.7rem;
+        padding: 7px 0px;
+        width: 98%;
+        border-radius: 6px;
+        color: $text--white;
+        background-color: $backgroundAlt--color;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .pricecard__button:hover {
+        transition-duration: 200ms;
+        color: $backgroundAlt--color;
+        background-color: $text--white;
+      }
+      .pricecard__benefitsList {
+        height: auto;
+        width: 85%;
+        margin-top: 20px;
+        color: $text--white;
+        font-family: Arial;
+        font-size: 0.7rem;
+        line-height: 1.1rem;
+        ul {
+          li {
+            background-color: $backgroundAlt2--color;
+            list-style-type: disc;
+          }
+        }
+      }
+    }
+  }
+}
+
+// For @extends
+
+.pricecard__textStyle {
+  background-color: inherit;
+  color: white;
+  font-family: Arial;
+  font-size: 1.1rem;
+  margin-bottom: 3vh;
+}

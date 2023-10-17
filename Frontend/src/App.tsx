@@ -10,6 +10,8 @@ import Error from "./pages/Error";
 import "./stylesheets/App.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Pricing from "./pages/Pricing";
+import SortLabels from "./pages/SortLabels";
 
 
 function App() {
@@ -33,6 +35,16 @@ function App() {
           path: "login",
           element: <Login />,
           errorElement: <Error screen={"Login-Page"} />,
+        },
+        {
+          path: "pricing",
+          element: <Pricing />,
+          errorElement: <Error screen={"Pricing-Page"} />,
+        },
+        {
+          path: "sortlabels/:type",
+          element: <SortLabels />,
+          errorElement: <Error screen={"SortLabels-Page"} />,
         },
       ]
     }

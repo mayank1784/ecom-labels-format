@@ -1,68 +1,17 @@
 * {
   margin: 0px;
   padding: 0px;
-  background-color: #ffffff;
 }
 
 .main {
+  position: absolute;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
 }
-.main .nav {
-  height: 7vh;
-  padding: 20px 20px 5px 20px;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-start;
-  align-items: center;
-  position: relative;
-  font-size: 26px;
-  font-family: Tahoma;
-  background-color: #04a7ab;
-}
-.main .nav .nav__logoImage {
-  position: absolute;
-  height: 50px;
-  width: 50px;
-  -o-object-fit: contain;
-     object-fit: contain;
-  top: 15px;
-  left: 20px;
-}
-.main .nav .nav__logInText {
-  border: 1.5px solid #000000;
-  color: #04a7ab;
-  background-color: #f3f3f3;
-  border-radius: 10px;
-  padding: 5px 10px;
-}
-.main .nav .nav__logInText:hover {
-  transition-duration: 100ms;
-  border-color: #ffffff;
-  background-color: #04a7ab;
-  color: #ffffff;
-}
-.main .nav .nav__toolsDropdown {
-  margin-right: 30px;
-  display: flex;
-  justify-content: center;
-}
-.main .nav .nav__toolsDropdown .nav__downArrow {
-  background-color: inherit;
-}
 .main .main__waveSvg img {
   display: block;
   max-width: 100%;
-}
-
-.navText--style, .main .nav text, .main .nav .nav__toolsDropdown {
-  margin-right: 15px;
-  font-size: 19px;
-  padding: 10px 5px;
-  color: #f3f3f3;
-  background-color: inherit;
-  cursor: pointer;
 }/*# sourceMappingURL=App.css.map */

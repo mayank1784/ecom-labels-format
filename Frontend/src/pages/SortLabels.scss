@@ -1,0 +1,104 @@
+@import "../stylesheets/Variables.scss";
+
+// For @ extends
+
+.sortlabels__textStyle {
+  color: $text--black;
+  font-size: 1.05rem;
+  font-family: sans-serif;
+}
+.sortlabels__buttonStyle {
+  display: flex;
+  justify-content: center;
+  height: auto;
+  width: 10vw;
+  padding: 7px 6px;
+  color: $text--black;
+  border-radius: 6px;
+  border: 2px solid $backgroundAlt--color;
+  background-color: $text--white;
+  cursor: pointer;
+}
+.sortlabels__buttonStyle__hover {
+  transition-duration: 200ms;
+  color: $text--white;
+  border-color: $text--white;
+  background-color: $backgroundAlt--color;
+}
+
+// Normal Stuff
+
+.sortlabels {
+  height: 74vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .sortlabels__leftContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0px 2vw;
+    .sortlabels__extraDiv {
+      @extend .sortlabels__textStyle;
+      height: 30vh;
+      padding: 10vh 10px;
+      border: 1px solid black;
+    }
+    .sortlabels__featuresDiv {
+      height: 100%;
+      margin-top: 10px;
+      .sortlabels__featuresTitle {
+        @extend .sortlabels__textStyle;
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+      .sortlabels__featuresContainer {
+        padding: 8px 0px 0px 10px;
+        .sortlabels__feature {
+          list-style: decimal;
+        }
+      }
+    }
+  }
+  .sortlabels__mainContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px 10vw;
+    .sortlabels__titleText {
+      @extend .sortlabels__textStyle;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .sortlabels__descriptionText {
+      @extend .sortlabels__textStyle;
+      margin: 20px 0px 60px 0px;
+    }
+    .sortlabels__uploadIcon {
+      margin-bottom: 20px;
+    }
+    .sortlabels__uploadButton {
+      @extend .sortlabels__textStyle;
+      @extend .sortlabels__buttonStyle;
+    }
+    .sortlabels__uploadButton:hover {
+      @extend .sortlabels__buttonStyle__hover;
+    }
+    .sortlabels__signInButton {
+      @extend .sortlabels__textStyle;
+      @extend .sortlabels__buttonStyle;
+    }
+    .sortlabels__signInButton:hover {
+      @extend .sortlabels__buttonStyle__hover;
+    }
+  }
+  .sortlabels__rightContent {
+    margin: 0px 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .sortlabels__durationText {
+      @extend .sortlabels__textStyle;
+    }
+  }
+}
