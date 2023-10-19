@@ -95,10 +95,14 @@
   .sortlabels__rightContent {
     margin: 0px 5vw;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: space-around;
     .sortlabels__durationText {
       @extend .sortlabels__textStyle;
+    }
+    .sortlabels__linkSpan {
+      @extend .sortlabels__textStyle;
+      color: blue;
     }
   }
 }

@@ -5,10 +5,10 @@ const PriceCard = ({ plan, cost, big }: any) => {
     const [cardSize, setCardSize] = useState<string>("");
     useEffect(() => {
         if (big == "true") {
-            setCardSize("44vh");
+            setCardSize("54vh");
         }
         else {
-            setCardSize("40vh");
+            setCardSize("50vh");
         }
     }
         , [])
@@ -16,10 +16,10 @@ const PriceCard = ({ plan, cost, big }: any) => {
         <div className='pricecard' style={{ height: cardSize }}>
             {
                 cost == "11.99" ? (
-                    <span className="pricecard__planSubText">FOR BUISNESSES</span>
+                    <span className="pricecard__planSubText">BUISNESS</span>
 
                 ) : (
-                    <span className="pricecard__planSubText">FOR INDIVIDUALS</span>
+                    <span className="pricecard__planSubText">INDIVIDUAL</span>
                 )
             }
             <text className="pricecard__planText">{plan}</text>

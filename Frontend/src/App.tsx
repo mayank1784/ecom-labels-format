@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Pricing from "./pages/Pricing";
 import SortLabels from "./pages/SortLabels";
+import Loading from "./pages/Loading";
 
 
 function App() {
@@ -45,6 +46,11 @@ function App() {
           path: "sortlabels/:type",
           element: <SortLabels />,
           errorElement: <Error screen={"SortLabels-Page"} />,
+        },
+        {
+          path: "loading",
+          element: <Loading />,
+          errorElement: <Error screen={"Loading-Page"} />,
         },
       ]
     }

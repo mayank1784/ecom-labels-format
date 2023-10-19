@@ -1,4 +1,4 @@
-.sortlabels__textStyle, .sortlabels .sortlabels__rightContent .sortlabels__durationText, .sortlabels .sortlabels__mainContent .sortlabels__signInButton, .sortlabels .sortlabels__mainContent .sortlabels__uploadButton, .sortlabels .sortlabels__mainContent .sortlabels__descriptionText, .sortlabels .sortlabels__mainContent .sortlabels__titleText, .sortlabels .sortlabels__leftContent .sortlabels__featuresDiv .sortlabels__featuresTitle, .sortlabels .sortlabels__leftContent .sortlabels__extraDiv {
+.sortlabels__textStyle, .sortlabels .sortlabels__rightContent .sortlabels__linkSpan, .sortlabels .sortlabels__rightContent .sortlabels__durationText, .sortlabels .sortlabels__mainContent .sortlabels__signInButton, .sortlabels .sortlabels__mainContent .sortlabels__uploadButton, .sortlabels .sortlabels__mainContent .sortlabels__descriptionText, .sortlabels .sortlabels__mainContent .sortlabels__titleText, .sortlabels .sortlabels__leftContent .sortlabels__featuresDiv .sortlabels__featuresTitle, .sortlabels .sortlabels__leftContent .sortlabels__extraDiv {
   color: #424242;
   font-size: 1.05rem;
   font-family: sans-serif;
@@ -74,6 +74,9 @@
 .sortlabels .sortlabels__rightContent {
   margin: 0px 5vw;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__linkSpan {
+  color: blue;
 }/*# sourceMappingURL=SortLabels.css.map */
