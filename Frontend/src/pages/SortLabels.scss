@@ -46,7 +46,7 @@
     }
     .sortlabels__featuresDiv {
       height: 100%;
-      margin-top: 10px;
+      margin-top: 20px;
       .sortlabels__featuresTitle {
         @extend .sortlabels__textStyle;
         font-size: 1.4rem;
@@ -93,16 +93,44 @@
     }
   }
   .sortlabels__rightContent {
-    margin: 0px 5vw;
+    margin: 0px 3vw;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    .sortlabels__columnFlex {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      // prolly need to add durationText
+      .sortlabels__filesList {
+        cursor: pointer;
+        .sortlabels__fileItem {
+          font-size: 0.8rem;
+          font-family: Tahoma;
+          font-weight: 500;
+          margin: 10px 0px 10px 0px;
+          padding: 10px 6px;
+          color: $text--black;
+          border: 2px solid $backgroundAlt2--color;
+          border-radius: 6px;
+          list-style-type: none;
+        }
+        .sortlabels__fileItem:hover {
+          color: $text--white;
+          border: 2px solid $backgroundAlt2--color;
+          background-color: $backgroundAlt--color;
+        }
+      }
+    }
     .sortlabels__durationText {
       @extend .sortlabels__textStyle;
     }
     .sortlabels__linkSpan {
       @extend .sortlabels__textStyle;
       color: blue;
+      cursor: pointer;
     }
   }
 }

@@ -16,7 +16,7 @@ const SigningCard = ({ type }: propType) => {
         }
     }, [])
 
-    console.log(type);
+    // console.log(type);
     return (
         <div className="SigningCard">
             <div className="SigningCard__container">

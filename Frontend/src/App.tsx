@@ -48,7 +48,7 @@ function App() {
           errorElement: <Error screen={"SortLabels-Page"} />,
         },
         {
-          path: "loading",
+          path: "loading/:id",
           element: <Loading />,
           errorElement: <Error screen={"Loading-Page"} />,
         },

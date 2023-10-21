@@ -11,24 +11,23 @@
 }
 .nav .nav__logoImage {
   position: absolute;
-  height: 4.26rem;
+  top: 0px;
+  left: 16px;
+  height: 9vh;
   width: auto;
-  margin-bottom: 20px;
+  padding: 0px 6px;
   -o-object-fit: contain;
      object-fit: contain;
-  top: 0px;
-  left: 20px;
-  cursor: pointer;
   background-color: inherit;
+  cursor: pointer;
 }
 .nav .nav__companyText {
   position: absolute;
-  top: 23px;
-  left: 110px;
+  top: 2vh;
+  left: calc(9vh + 35px);
   padding: 5px 3px;
-  margin-bottom: 20px;
   font-family: Franklin Gothic Medium;
-  font-size: 1.6rem;
+  font-size: 4vh;
   background-color: inherit;
   color: #f3f3f3;
   cursor: pointer;
@@ -62,10 +61,9 @@
 
 .navText--style, .nav text, .nav .nav__toolsDropdown {
   margin-right: 15px;
-  font-size: 1.09rem;
-  margin-top: 20px;
-  padding-right: 5px;
-  padding-bottom: 20px;
+  font-size: 2.5vh;
+  margin-top: 3.2vh;
+  padding: 0px 5px 2.3vh 5px;
   color: #f3f3f3;
   background-color: inherit;
   cursor: pointer;

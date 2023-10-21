@@ -43,7 +43,7 @@
 }
 .sortlabels .sortlabels__leftContent .sortlabels__featuresDiv {
   height: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .sortlabels .sortlabels__leftContent .sortlabels__featuresDiv .sortlabels__featuresTitle {
   font-size: 1.4rem;
@@ -72,11 +72,38 @@
   margin-bottom: 20px;
 }
 .sortlabels .sortlabels__rightContent {
-  margin: 0px 5vw;
+  margin: 0px 3vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList {
+  cursor: pointer;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList .sortlabels__fileItem {
+  font-size: 0.8rem;
+  font-family: Tahoma;
+  font-weight: 500;
+  margin: 10px 0px 10px 0px;
+  padding: 10px 6px;
+  color: #424242;
+  border: 2px solid #0e111f;
+  border-radius: 6px;
+  list-style-type: none;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList .sortlabels__fileItem:hover {
+  color: #f3f3f3;
+  border: 2px solid #0e111f;
+  background-color: #04a7ab;
+}
 .sortlabels .sortlabels__rightContent .sortlabels__linkSpan {
   color: blue;
+  cursor: pointer;
 }/*# sourceMappingURL=SortLabels.css.map */
