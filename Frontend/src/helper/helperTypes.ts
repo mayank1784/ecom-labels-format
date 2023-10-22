@@ -5,6 +5,14 @@ export type propTypeTwo = {
   id: string;
 };
 export type uploadDataType = {
-  name: string;
-  id: string;
+  message: string;
+  data: string[];
+};
+// for use of accessing properties of "user" object
+export type userDataType = {
+  _id: string;
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
 };

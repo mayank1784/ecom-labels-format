@@ -5,11 +5,11 @@ import Upload from '../components/Upload';
 
 // library imports
 import { v4 as uuidv4 } from "uuid";
-import { BiCloudUpload } from "react-icons/bi";
 
 // Stylesheet and types
 import { propType, uploadDataType } from "../helper/helperTypes";
 import "./SortLabels.css";
+import { fetchFileNames } from "../helper/helperFunc";
 
 
 
@@ -17,7 +17,9 @@ const SortLabels = () => {
 
     // To check the user Login status
     const [userStatus, setuserStatus] = useState<Boolean>(false);
-    const [fileData, setFileData] = useState<uploadDataType[]>();
+    const [fileData, setFileData] = useState<uploadDataType>();
+    // This useState has chance to be redundant
+    const [fileDataFlag, setFileDataFlag] = useState<number>(0);
 
     // To help with the functionality of countdown
     const [seconds, setSeconds] = useState<number>(-1);
@@ -37,14 +39,24 @@ const SortLabels = () => {
     // Hooks 
 
 
-    // To check user login status
+    // To check user login status - Import files processed in last 30 mins
+    // This useEffect is also triggered when any file is uploaded
     useEffect(() => {
         // runs once when the component is rendered
-        fetchUploadData();
+        // This function fetches data from the backend about uploaded files, namely their file name and id.
+        // We can look into providing links for those files
+        const fetchUploadData = () => {
+            // fetching file name data from backend
+            // Should also run when we upload a new file @@@
+            // @@@
+            // setFileData(fetchFileNames());
+
+        }
+        // To check user login status
         if (true) {
             setuserStatus(true);
         }
-    }, [])
+    }, [fileDataFlag])
 
     // To handle coundown functionality
     useEffect(() => {
@@ -70,26 +82,6 @@ const SortLabels = () => {
         };
     }, [seconds])
 
-    // This function fetches data from the backend about uploaded files, namely their file name and id.
-    // We can look into providing links for those files
-    const fetchUploadData = () => {
-        // for now we will explicitly fill up the names and ID's into a variable.
-
-        const newData: uploadDataType[] = [{
-            name: "Flipkart-101.pdf",
-            id: "015a8cd6-112a-4628-a72c-b7b346f0d7a4"
-        }, {
-            name: "Amazon-123.pdf",
-            id: "015a8c14-112a-4628-a72c-b7b696f0d7a4"
-        }, {
-            name: "Meesho-113.pdf",
-            id: "015a8cd6-112a-4628-1s2c-b7b696f0d7a4"
-        }];
-
-        setFileData(newData);
-
-    }
-
     // Functionality to start countdown upto 5(visible) then change a state
 
     const { type } = useParams<propType>();
@@ -103,9 +95,11 @@ const SortLabels = () => {
                     <text className="sortlabels__featuresTitle"> Features</text>
                     <ul className="sortlabels__featuresContainer">
                         {
-                            features.map((feature: string) => {
+                            features.map((feature: string, index) => {
                                 return (
-                                    <li className="sortlabels__feature">{feature}</li>
+                                    <li className="sortlabels__feature"
+                                        key={index}
+                                    >{feature}</li>
                                 )
                             })
                         }
@@ -119,10 +113,6 @@ const SortLabels = () => {
                         <>
                             <text className="sortlabels__titleText"> Crop {type} Labels</text>
                             <text className="sortlabels__descriptionText">Crop and sort {type} PDF Labels in the order you want with the easiest {type} Label Crop tool available.</text>
-                            {/* <BiCloudUpload className="sortlabels__uploadIcon" size="6rem" />
-                            <span className="sortlabels__uploadButton" onClick={() => {
-                                setSeconds(5)
-                            }}>Upload Doc.</span> */}
                             <Upload />
                         </>
                     ) : (
@@ -143,12 +133,11 @@ const SortLabels = () => {
                             <text className="sortlabels__durationText">Previously uploaded files...</text>
                             <ul className="sortlabels__filesList">
                                 {
-                                    fileData && fileData.map((fileDataObject: uploadDataType) => {
+                                    fileData && fileData.data.map((fileName: string, index) => {
                                         return (
-                                            <li className="sortlabels__fileItem">
-                                                {fileDataObject.name}
-                                                <br />
-                                                {fileDataObject.id.slice(0, 8)}...
+                                            <li className="sortlabels__fileItem"
+                                                key={index}>
+                                                {fileName}
                                             </li>
                                         )
                                     })
@@ -174,3 +163,17 @@ const SortLabels = () => {
 }
 
 export default SortLabels
+
+
+
+
+// const newData: uploadDataType[] = [{
+            //     name: "Flipkart-101.pdf",
+            //     id: "015a8cd6-112a-4628-a72c-b7b346f0d7a4"
+            // }, {
+            //     name: "Amazon-123.pdf",
+            //     id: "015a8c14-112a-4628-a72c-b7b696f0d7a4"
+            // }, {
+            //     name: "Meesho-113.pdf",
+            //     id: "015a8cd6-112a-4628-1s2c-b7b696f0d7a4"
+            // }];

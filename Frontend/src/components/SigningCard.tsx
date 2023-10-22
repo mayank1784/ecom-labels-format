@@ -3,11 +3,13 @@ import Logo from "../assets/websiteLogo.png";
 import { BsGoogle } from "react-icons/bs"
 import { propType } from "../helper/helperTypes";
 import { useEffect, useState } from "react";
+import { fetchUserData, signInGoogle } from "../helper/helperFunc";
 
 
 const SigningCard = ({ type }: propType) => {
 
     const [pageType, setPageType] = useState<String>("");
+
     useEffect(() => {
         if (type == "register") {
             setPageType("Register")
@@ -15,6 +17,11 @@ const SigningCard = ({ type }: propType) => {
             setPageType("Sign in")
         }
     }, [])
+
+    const googleButtonHandler = () => {
+        signInGoogle();
+        console.log(fetchUserData());
+    }
 
     // console.log(type);
     return (
@@ -24,7 +31,7 @@ const SigningCard = ({ type }: propType) => {
                     {pageType}
                 </span>
                 <img className="SigningCard__logo" src={Logo} alt="" width={"200px"} height={"200px"} />
-                <div className="SigningCard__button">
+                <div className="SigningCard__button" onClick={googleButtonHandler}>
                     <BsGoogle className="SigningCard__googleLogo" size="16px" />
                     Continue with google</div>
                 <hr />

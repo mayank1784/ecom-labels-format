@@ -2,7 +2,6 @@
 
 $skin: #04a7ab;
 
-
 //upload component
 .upload {
   position: relative;
@@ -10,17 +9,17 @@ $skin: #04a7ab;
   min-height: 400px;
   box-sizing: border-box;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(black, .2);
+  box-shadow: 0 2px 5px rgba(black, 0.2);
   padding-bottom: 20px;
   background: #fff;
-  animation: fadeup .5s .5s ease both;
+  animation: fadeup 0.5s 0.5s ease both;
   transform: translateY(20px);
   opacity: 0;
   .upload-files {
     header {
       background: $skin;
-				  border-top-left-radius: 5px;
-					 border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
       text-align: center;
       p {
         color: #fff;
@@ -31,23 +30,23 @@ $skin: #04a7ab;
           transform: translateY(20px);
           opacity: 0;
           font-size: 30px;
-          animation: fadeup .5s 1s ease both;
+          animation: fadeup 0.5s 1s ease both;
         }
-        .up {
-          font-weight: bold;
-          transform: translateX(-20px);
-          display: inline-block;
-          opacity: 0;
-          animation: faderight .5s 1.5s ease both;
-        }
-        .load {
-          display: inline-block;
-          font-weight: 100;
-          margin-left: -8px;
-          transform: translateX(-20px);
-          opacity: 0;
-          animation: faderight 1s 1.5s ease both;
-        }
+        // .up {
+        //   font-weight: bold;
+        //   transform: translateX(-20px);
+        //   display: inline-block;
+        //   opacity: 0;
+        //   animation: faderight 0.5s 1.5s ease both;
+        // }
+        // .load {
+        //   display: inline-block;
+        //   font-weight: 100;
+        //   margin-left: -8px;
+        //   transform: translateX(-20px);
+        //   opacity: 0;
+        //   animation: faderight 1s 1.5s ease both;
+        // }
       }
     }
     .body {
@@ -73,38 +72,32 @@ $skin: #04a7ab;
           color: $skin;
           cursor: pointer;
         }
-        b:hover,a:hover{
-            text-decoration: underline;
+        b:hover,
+        a:hover {
+          text-decoration: underline;
         }
       }
       &.active {
         border: dashed 2px $skin;
         i {
-          box-shadow: 0 0 0 -3px #fff,
-          0 0 0 lightgray,
-          0 0 0 -3px #fff,
-          0 0 0 lightgray;
-          animation: file .5s ease both;
+          box-shadow: 0 0 0 -3px #fff, 0 0 0 lightgray, 0 0 0 -3px #fff,
+            0 0 0 lightgray;
+          animation: file 0.5s ease both;
         }
         @keyframes file {
           50% {
-            box-shadow: -8px 8px 0 -3px #fff,
-            -8px 8px 0 lightgray,
-            -8px 8px 0 -3px #fff,
-            -8px 8px 0 lightgray;
+            box-shadow: -8px 8px 0 -3px #fff, -8px 8px 0 lightgray,
+              -8px 8px 0 -3px #fff, -8px 8px 0 lightgray;
           }
           75%,
           100% {
-            box-shadow: -8px 8px 0 -3px #fff,
-            -8px 8px 0 lightgray,
-            -16px 16px 0 -3px #fff,
-            -16px 16px 0 lightgray;
+            box-shadow: -8px 8px 0 -3px #fff, -8px 8px 0 lightgray,
+              -16px 16px 0 -3px #fff, -16px 16px 0 lightgray;
           }
         }
-        .pointer-none{
+        .pointer-none {
           pointer-events: none;
         }
-    
       }
     }
     footer {
@@ -117,7 +110,7 @@ $skin: #04a7ab;
         border-top: solid 4px darken($skin, 3.5%);
         text-align: center;
         overflow: hidden;
-        transition: width .5s ease;
+        transition: width 0.5s ease;
         span {
           display: inline-block;
           transform: translateY(-25px);
@@ -131,7 +124,7 @@ $skin: #04a7ab;
           width: 100%;
           span {
             transform: translateY(0);
-            transition: transform .5s .5s ease;
+            transition: transform 0.5s 0.5s ease;
           }
         }
       }
@@ -145,16 +138,15 @@ $skin: #04a7ab;
         overflow-y: auto;
         max-height: 300px;
         &::-webkit-scrollbar-track {
-            background-color: rgba(lightgray, .25);
+          background-color: rgba(lightgray, 0.25);
         }
         &::-webkit-scrollbar {
-            width: 4px;
-            background-color: rgba(lightgray, .25);
-    
+          width: 4px;
+          background-color: rgba(lightgray, 0.25);
         }
         &::-webkit-scrollbar-thumb {
-            background-color: rgba($skin, .5);
-            cursor: grab;
+          background-color: rgba($skin, 0.5);
+          cursor: grab;
         }
         .file {
           width: 300px;
@@ -163,7 +155,7 @@ $skin: #04a7ab;
           justify-content: space-between;
           align-items: center;
           opacity: 0;
-          animation: fade .35s ease both;
+          animation: fade 0.35s ease both;
           .name {
             font-size: 12px;
             white-space: nowrap;
@@ -177,7 +169,12 @@ $skin: #04a7ab;
             height: 5px;
             border: solid 1px lightgray;
             border-radius: 2px;
-            background: linear-gradient(to left, rgba($skin, .2), rgba($skin, .8)) no-repeat;
+            background: linear-gradient(
+                to left,
+                rgba($skin, 0.2),
+                rgba($skin, 0.8)
+              )
+              no-repeat;
             background-size: 100% 100%;
             &.active {
               animation: progress 1.5s linear;
@@ -192,11 +189,10 @@ $skin: #04a7ab;
               background-size: 100% 100%;
             }
           }
-
         }
       }
       .importar {
-							 width: 125px;
+        width: 125px;
         outline: none;
         position: absolute;
         left: 0;
@@ -214,15 +210,16 @@ $skin: #04a7ab;
         cursor: pointer;
         transform: translateY(15px);
         opacity: 0;
-							 visibility: hidden;
+        visibility: hidden;
         //margin-left: calc(50% - 40px);
         &.active {
-          transition: transform .5s 1.5s ease, opacity .5s 1.5s ease, background;
+          transition: transform 0.5s 1.5s ease, opacity 0.5s 1.5s ease,
+            background;
           transform: translateY(0);
           opacity: 1;
-									 visibility: visible;
+          visibility: visible;
         }
-        &:hover{
+        &:hover {
           background: $skin;
           color: #000;
         }
@@ -246,17 +243,15 @@ $skin: #04a7ab;
       opacity: 1;
     }
   }
-  @media (max-width: 400px){
+  @media (max-width: 400px) {
     width: 100%;
     height: 100%;
   }
 }
 .delete {
-    color: #fe725d;
-    border: none;
-    font-size: 20px;
-    padding: 5px 5px;
-    cursor: pointer;
-  }
-  
-  
+  color: #fe725d;
+  border: none;
+  font-size: 20px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
