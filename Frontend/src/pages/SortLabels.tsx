@@ -1,6 +1,7 @@
 // react and react router imports
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import Upload from '../components/Upload';
 
 // library imports
 import { v4 as uuidv4 } from "uuid";
@@ -118,10 +119,11 @@ const SortLabels = () => {
                         <>
                             <text className="sortlabels__titleText"> Crop {type} Labels</text>
                             <text className="sortlabels__descriptionText">Crop and sort {type} PDF Labels in the order you want with the easiest {type} Label Crop tool available.</text>
-                            <BiCloudUpload className="sortlabels__uploadIcon" size="6rem" />
+                            {/* <BiCloudUpload className="sortlabels__uploadIcon" size="6rem" />
                             <span className="sortlabels__uploadButton" onClick={() => {
                                 setSeconds(5)
-                            }}>Upload Doc.</span>
+                            }}>Upload Doc.</span> */}
+                            <Upload />
                         </>
                     ) : (
                         <>
