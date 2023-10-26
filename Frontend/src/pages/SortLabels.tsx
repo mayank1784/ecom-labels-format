@@ -17,7 +17,7 @@ const SortLabels = () => {
 
     // To check the user Login status
     const [userStatus, setuserStatus] = useState<Boolean>(false);
-    const [fileData, setFileData] = useState<uploadDataType>();
+    const [fileData, setFileData] = useState<string[]>([]);
     // This useState has chance to be redundant
     const [fileDataFlag, setFileDataFlag] = useState<number>(0);
 
@@ -45,18 +45,29 @@ const SortLabels = () => {
         // runs once when the component is rendered
         // This function fetches data from the backend about uploaded files, namely their file name and id.
         // We can look into providing links for those files
-        const fetchUploadData = () => {
+        const fetchUploadData = async() => {
             // fetching file name data from backend
             // Should also run when we upload a new file @@@
             // @@@
             // setFileData(fetchFileNames());
+            try{
+                const data = await fetchFileNames();
+                setFileData(data.data);
+                // console.log("files: ", data.data);
+                // console.log("filedata: ", fileData);
+            }catch(err){
+                console.error("Error fetching file names.", err);
+            }
 
-        }
+         }
+        
+         fetchUploadData();
+        //  console.log("filedata: ", fileData);
         // To check user login status
         if (true) {
             setuserStatus(true);
         }
-    }, [fileDataFlag])
+    }, [])
 
     // To handle coundown functionality
     useEffect(() => {
@@ -133,7 +144,7 @@ const SortLabels = () => {
                             <text className="sortlabels__durationText">Previously uploaded files...</text>
                             <ul className="sortlabels__filesList">
                                 {
-                                    fileData && fileData.data.map((fileName: string, index) => {
+                                    fileData && fileData.map((fileName: string, index) => {
                                         return (
                                             <li className="sortlabels__fileItem"
                                                 key={index}>

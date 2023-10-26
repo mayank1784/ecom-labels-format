@@ -4,10 +4,10 @@ export type propType = {
 export type propTypeTwo = {
   id: string;
 };
-export type uploadDataType = {
-  message: string;
-  data: string[];
-};
+// export type uploadDataType = {
+//   // message: string;
+//   data: string[];
+// };
 // for use of accessing properties of "user" object
 export type userDataType = {
   _id: string;
