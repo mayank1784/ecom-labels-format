@@ -66,7 +66,8 @@ const SortLabels = () => {
 
         // Might not be working
         fetchUserData().then((res) => {
-            if (res.message === "User details retrieved successfully") {
+            // console.log("response from back",res.data.message);
+            if (res.data.message == "User details retrieved successfully.") {
                 setuserStatus(true);
             }
         })
