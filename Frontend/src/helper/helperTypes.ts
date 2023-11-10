@@ -25,6 +25,11 @@ export type pdfNameDataType = {
 
 // for use of accessing properties of "user" object
 export type userDataType = {
+  message: String;
+  data: null | userDatadataType;
+};
+
+type userDatadataType = {
   _id: string;
   uid: string;
   email: string;

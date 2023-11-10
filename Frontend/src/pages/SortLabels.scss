@@ -87,6 +87,7 @@
     .sortlabels__signInButton {
       @extend .sortlabels__textStyle;
       @extend .sortlabels__buttonStyle;
+      text-decoration: none;
     }
     .sortlabels__signInButton:hover {
       @extend .sortlabels__buttonStyle__hover;

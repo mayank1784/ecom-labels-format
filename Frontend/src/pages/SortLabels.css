@@ -71,6 +71,9 @@
 .sortlabels .sortlabels__mainContent .sortlabels__uploadIcon {
   margin-bottom: 20px;
 }
+.sortlabels .sortlabels__mainContent .sortlabels__signInButton {
+  text-decoration: none;
+}
 .sortlabels .sortlabels__rightContent {
   margin: 0px 3vw;
   display: flex;

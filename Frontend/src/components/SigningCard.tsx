@@ -4,11 +4,13 @@ import { BsGoogle } from "react-icons/bs"
 import { propType } from "../helper/helperTypes";
 import { useEffect, useState } from "react";
 import { fetchUserData, signInGoogle } from "../helper/helperFunc";
+import { useNavigate } from "react-router";
 
 
 const SigningCard = ({ type }: propType) => {
 
     const [pageType, setPageType] = useState<String>("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (type == "register") {
@@ -18,9 +20,10 @@ const SigningCard = ({ type }: propType) => {
         }
     }, [])
 
-    const googleButtonHandler = () => {
-        signInGoogle();
+    const googleButtonHandler = async () => {
+        await signInGoogle();
         console.log("Google function done")
+        navigate(-1);
         // console.log(fetchUserData());
     }
 

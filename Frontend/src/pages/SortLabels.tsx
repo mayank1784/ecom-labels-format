@@ -9,7 +9,8 @@ import { v4 as uuidv4 } from "uuid";
 // Stylesheet and types
 import { pdfNameDataType, propType } from "../helper/helperTypes";
 import "./SortLabels.css";
-import { fetchFileNames } from "../helper/helperFunc";
+import { fetchFileNames, fetchUserData } from "../helper/helperFunc";
+import { Link } from "react-router-dom";
 
 
 
@@ -62,11 +63,13 @@ const SortLabels = () => {
         }
 
         fetchUploadData();
-        //  console.log("filedata: ", fileData);
-        // To check user login status
-        if (true) {
-            setuserStatus(true);
-        }
+
+        // Might not be working
+        fetchUserData().then((res) => {
+            if (res.message === "User details retrieved successfully") {
+                setuserStatus(true);
+            }
+        })
     }, [])
 
     // To handle coundown functionality
@@ -130,7 +133,12 @@ const SortLabels = () => {
                         <>
                             <text className="sortlabels__titleText"> Crop {type} Labels</text>
                             <text className="sortlabels__descriptionText">Crop and sort {type} PDF Labels in the order you want with the easiest {type} Label Crop tool available.</text>
-                            <span className="sortlabels__signInButton">Register First</span>
+                            <Link to="/register" className="sortlabels__signInButton">
+                                {/* <span className="sortlabels__signInButton"> */}
+                                Register First
+                                {/* </span> */}
+                            </Link>
+
                         </>
                     )
                 }
