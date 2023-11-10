@@ -20,7 +20,8 @@ const SigningCard = ({ type }: propType) => {
 
     const googleButtonHandler = () => {
         signInGoogle();
-        console.log(fetchUserData());
+        console.log("Google function done")
+        // console.log(fetchUserData());
     }
 
     // console.log(type);

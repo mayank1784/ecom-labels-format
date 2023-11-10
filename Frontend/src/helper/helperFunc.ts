@@ -34,7 +34,7 @@ export const handleUploadClick = async (selectedFiles: File[]) => {
 
 // fetch pdf Uploaded in last 30 mins
 export const fetchFileNames = async () => {
-  try{
+  try {
     const sessionToken = Cookies.get("sessionToken");
     const response = await axios.get(`/api/processedPdfNames`, {
       headers: {
@@ -42,11 +42,12 @@ export const fetchFileNames = async () => {
         "Content-Type": "multipart/form-data", // Set the correct content type
       },
     });
-    if (response.status === 200){
-    // console.log("res: ", response.data);
-    return response.data;}
+    if (response.status === 200) {
+      // console.log("res: ", response.data);
+      return response;
+    }
     // else{
-    //   return 
+    //   return
     // }
   } catch (error) {
     console.error(error);
