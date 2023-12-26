@@ -7,7 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Upload.css";
 import { handleUploadClick } from "../helper/helperFunc";
 
-function FileUploader() {
+interface FileUploaderProps {
+  onUploadCompletion: () => void; // Specify the type for onUploadCompletion prop
+}
+
+function FileUploader({ onUploadCompletion }: FileUploaderProps){
   // Set file data for uploading
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -71,8 +75,11 @@ function FileUploader() {
     if (selectedFiles.length > 0) {
       // Imported from helper Function
       handleUploadClick(selectedFiles);
+      // Notify parent component about upload completion
+      onUploadCompletion();
       setSelectedFiles([]);
       setShowProgressBar(false);
+      
     }
   }
 

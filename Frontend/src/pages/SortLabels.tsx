@@ -21,6 +21,7 @@ const SortLabels = () => {
     const [fileData, setFileData] = useState<pdfNameDataType>();
     // This useState has chance to be redundant
     const [fileDataFlag, setFileDataFlag] = useState<number>(0);
+    const [showFileName,setShowFileName] = useState<Boolean>(true);
 
     // To help with the functionality of countdown
     const [seconds, setSeconds] = useState<number>(-1);
@@ -34,71 +35,77 @@ const SortLabels = () => {
     // To help navigate to loading page with the pdf ID, for use there
     const navigate = useNavigate();
 
-    // This id generation will be replaced by the ID given from the backend on proccessing
-    const randomUUID = uuidv4();
+    
 
     // Hooks 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // To check user login status - Import files processed in last 30 mins
-    // This useEffect is also triggered when any file is uploaded
-    useEffect(() => {
-        // runs once when the component is rendered
-        // This function fetches data from the backend about uploaded files, namely their file name and id.
-        // We can look into providing links for those files
-        const fetchUploadData = async () => {
-            // fetching file name data from backend
-            // Should also run when we upload a new file @@@
-            // @@@
-            // setFileData(fetchFileNames());
-            try {
-                const data = await fetchFileNames();
-                setFileData(data?.data);
-                // console.log("files: ", data.data);
-                console.log("filedata: ", fileData);
-            } catch (err) {
-                console.error("Error fetching file names.", err);
-            }
-
+    // Function to fetch file names
+    const fetchUploadData = async () => {
+        try {
+            const data = await fetchFileNames();
+            setFileData(data?.data);
+        } catch (err) {
+            console.error("Error fetching file names.", err);
         }
-
-        fetchUploadData();
-
-        // Might not be working
-        fetchUserData().then((res) => {
-            // console.log("response from back",res.data.message);
-            if (res.data.message == "User details retrieved successfully.") {
-                setuserStatus(true);
-            }
-        })
-    }, [])
-
-    // To handle coundown functionality
-    useEffect(() => {
-        if (seconds == 5) {
-            // Start counter when the button is clicked
-            timerRef.current = setInterval(() => {
-                setSeconds((prevSeconds: number) => {
-                    if (prevSeconds === 1) {
-                        clearInterval(timerRef.current);
-                        // Setting this state to a flag value
-                        setSeconds(-2);
-                        return 0;
-                    }
-                    return prevSeconds - 1;
-                });
-            }, 1000);
+    }
+// Run fetchUploadData after initial load and every minute
+useEffect(() => {
+    fetchUploadData(); // Initial fetch after component render
+    //     // Might not be working
+    fetchUserData().then((res) => {
+        // console.log("response from back",res.data.message);
+        if (res.data.message == "User details retrieved successfully.") {
+            console.log('user retrieved')
+            setuserStatus(true);
         }
-        return () => {
-            if (seconds == 0) {
-                // Just for clarity, the one inside setInterval is exected 
-                clearInterval(timerRef.current);
-            }
-        };
-    }, [seconds])
+    })
+    const interval = setInterval(() => {
+        fetchUploadData(); // Fetch file names every minute
+    }, 60000); // 60000 milliseconds = 1 minute
 
-    // Functionality to start countdown upto 5(visible) then change a state
+    return () => clearInterval(interval); // Clear interval on component unmount
+}, []);
 
+// Callback function to be called after file upload completion
+const handleUploadCompletion = () => {
+    setShowFileName(false);
+    fetchUploadData(); // Fetch file names after upload completion
+    console.log('call complete')
+    setShowFileName(true);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // // To check user login status - Import files processed in last 30 mins
+    // // This useEffect is also triggered when any file is uploaded
+    // useEffect(() => {
+    //     // runs once when the component is rendered
+    //     // This function fetches data from the backend about uploaded files, namely their file name and id.
+    //     // We can look into providing links for those files
+    //     const fetchUploadData = async () => {
+    //         // fetching file name data from backend
+    //         // Should also run when we upload a new file @@@
+    //         // @@@
+    //         // setFileData(fetchFileNames());
+    //         try {
+    //             const data = await fetchFileNames();
+    //             setFileData(data?.data);
+    //             // console.log("files: ", data.data);
+    //             console.log("filedata: ", fileData);
+    //         } catch (err) {
+    //             console.error("Error fetching file names.", err);
+    //         }
+
+    //     }
+
+    //     fetchUploadData();
+
+    
+    // }, [])
+
+   
     const { type } = useParams<propType>();
     return (
         <div className="sortlabels">
@@ -128,7 +135,7 @@ const SortLabels = () => {
                         <>
                             <text className="sortlabels__titleText"> Crop {type} Labels</text>
                             <text className="sortlabels__descriptionText">Crop and sort {type} PDF Labels in the order you want with the easiest {type} Label Crop tool available.</text>
-                            <Upload />
+                            <Upload onUploadCompletion={handleUploadCompletion}/>
                         </>
                     ) : (
                         <>
@@ -150,7 +157,14 @@ const SortLabels = () => {
                 {
                     seconds && seconds == -1 ? (
                         <div className="sortlabels__columnFlex">
-                            <text className="sortlabels__durationText">Previously uploaded files...</text>
+                            <>
+                            {   showFileName ?
+                                (<text className="sortlabels__durationText">Previously uploaded files... </text>)
+                                :
+                                (<text className="sortlabels__durationText">File Loading... </text>)
+                            }
+                            </>
+                            
                             <ul className="sortlabels__filesList">
                                 {
                                     fileData && fileData.data.map((fileName: String, index) => {
