@@ -88,22 +88,21 @@
   justify-content: space-around;
 }
 .sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList {
+  height: 50vh;
+  overflow-y: scroll;
   cursor: pointer;
 }
 .sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList .sortlabels__fileItem {
   font-size: 0.8rem;
   font-family: Tahoma;
   font-weight: 500;
-  margin: 10px 0px 10px 0px;
   padding: 10px 6px;
+  margin: 5px 10px;
   color: #424242;
-  border: 2px solid #0e111f;
-  border-radius: 6px;
   list-style-type: none;
 }
 .sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList .sortlabels__fileItem:hover {
   color: #f3f3f3;
-  border: 2px solid #0e111f;
   background-color: #04a7ab;
 }
 .sortlabels .sortlabels__rightContent .sortlabels__linkSpan {

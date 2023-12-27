@@ -1,10 +1,7 @@
 // react and react router imports
-import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import Upload from '../components/Upload';
-
-// library imports
-import { v4 as uuidv4 } from "uuid";
 
 // Stylesheet and types
 import { pdfNameDataType, propType } from "../helper/helperTypes";
@@ -20,63 +17,51 @@ const SortLabels = () => {
     const [userStatus, setuserStatus] = useState<Boolean>(false);
     const [fileData, setFileData] = useState<pdfNameDataType>();
     // This useState has chance to be redundant
-    const [fileDataFlag, setFileDataFlag] = useState<number>(0);
-    const [showFileName,setShowFileName] = useState<Boolean>(true);
-
-    // To help with the functionality of countdown
-    const [seconds, setSeconds] = useState<number>(-1);
-
-    // To store id of setInterval entity
-    const timerRef = useRef<any>();    // using any here @@@
+    const [showFileName, setShowFileName] = useState<Boolean>(true);
 
     // Change the features here @@@
-    const features = ["Hi", "Hello", "Bye"];
-
-    // To help navigate to loading page with the pdf ID, for use there
-    const navigate = useNavigate();
-
-    
+    const features = ["Sorted by SKU and Qty", "Add SKU - QTY in Lable", "Remove extra blank pages", "Merge and process multiple labels"];
 
     // Hooks 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Run fetchUploadData after initial load and every minute
+    useEffect(() => {
+        fetchUploadData(); // Initial fetch after component render
+        //     // Might not be working
+        fetchUserData().then((res: any) => {   // Using any here   @@@
+            // console.log("response from back",res.data.message);
+            if (res.data.message == "User details retrieved successfully.") {
+                console.log('user retrieved')
+                setuserStatus(true);
+            }
+        })
+        const interval = setInterval(() => {
+            fetchUploadData(); // Fetch file names every minute
+        }, 60000); // 60000 milliseconds = 1 minute
+
+        return () => clearInterval(interval); // Clear interval on component unmount
+    }, []);
 
     // Function to fetch file names
     const fetchUploadData = async () => {
         try {
             const data = await fetchFileNames();
+            console.log(data, "inside fetchUploadData");
             setFileData(data?.data);
         } catch (err) {
             console.error("Error fetching file names.", err);
         }
     }
-// Run fetchUploadData after initial load and every minute
-useEffect(() => {
-    fetchUploadData(); // Initial fetch after component render
-    //     // Might not be working
-    fetchUserData().then((res) => {
-        // console.log("response from back",res.data.message);
-        if (res.data.message == "User details retrieved successfully.") {
-            console.log('user retrieved')
-            setuserStatus(true);
-        }
-    })
-    const interval = setInterval(() => {
-        fetchUploadData(); // Fetch file names every minute
-    }, 60000); // 60000 milliseconds = 1 minute
 
-    return () => clearInterval(interval); // Clear interval on component unmount
-}, []);
+    // Callback function to be called after file upload completion
+    const handleUploadCompletion = () => {
+        setShowFileName(false);
+        fetchUploadData(); // Fetch file names after upload completion 
+        console.log('call complete')
+        setShowFileName(true);
+    };
 
-// Callback function to be called after file upload completion
-const handleUploadCompletion = () => {
-    setShowFileName(false);
-    fetchUploadData(); // Fetch file names after upload completion
-    console.log('call complete')
-    setShowFileName(true);
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // // To check user login status - Import files processed in last 30 mins
     // // This useEffect is also triggered when any file is uploaded
@@ -102,10 +87,10 @@ const handleUploadCompletion = () => {
 
     //     fetchUploadData();
 
-    
+
     // }, [])
 
-   
+
     const { type } = useParams<propType>();
     return (
         <div className="sortlabels">
@@ -135,7 +120,7 @@ const handleUploadCompletion = () => {
                         <>
                             <text className="sortlabels__titleText"> Crop {type} Labels</text>
                             <text className="sortlabels__descriptionText">Crop and sort {type} PDF Labels in the order you want with the easiest {type} Label Crop tool available.</text>
-                            <Upload onUploadCompletion={handleUploadCompletion}/>
+                            <Upload onUploadCompletion={handleUploadCompletion} />
                         </>
                     ) : (
                         <>
@@ -154,60 +139,28 @@ const handleUploadCompletion = () => {
             </div>
             <hr />
             <div className="sortlabels__rightContent">
-                {
-                    seconds && seconds == -1 ? (
-                        <div className="sortlabels__columnFlex">
-                            <>
-                            {   showFileName ?
-                                (<text className="sortlabels__durationText">Previously uploaded files... </text>)
-                                :
-                                (<text className="sortlabels__durationText">File Loading... </text>)
-                            }
-                            </>
-                            
-                            <ul className="sortlabels__filesList">
-                                {
-                                    fileData && fileData.data.map((fileName: String, index) => {
-                                        return (
-                                            <li className="sortlabels__fileItem"
-                                                key={index}>
-                                                {fileName}
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                        </div>
-                    ) : seconds == -2 ? (
-                        <>
-                            <text className="sortlabels__durationText"> Your Link is almost ready</text>
-                            <span className="sortlabels__linkSpan" onClick={() => navigate(`/loading/${randomUUID}`)}>link here</span>
-                            {/* Thinking about passing props in the link with the pdf ID */}
-                        </>
-                    ) : (
-                        <text className="sortlabels__durationText"> Wait for... {seconds}</text>
-                    )
-                }
-                {
-
-                }
+                <div className="sortlabels__columnFlex">
+                    {showFileName ?
+                        (<text className="sortlabels__durationText">Previously uploaded files... </text>)
+                        :
+                        (<text className="sortlabels__durationText">File Loading... </text>)
+                    }
+                    <ul className="sortlabels__filesList">
+                        {
+                            fileData && fileData.data.map((fileName: String, index) => {
+                                return (
+                                    <li className="sortlabels__fileItem"
+                                        key={index}>
+                                        {fileName.slice(40, 49) + "__merged.pdf"}
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     )
 }
 
 export default SortLabels
-
-
-
-
-// const newData: uploadDataType[] = [{
-            //     name: "Flipkart-101.pdf",
-            //     id: "015a8cd6-112a-4628-a72c-b7b346f0d7a4"
-            // }, {
-            //     name: "Amazon-123.pdf",
-            //     id: "015a8c14-112a-4628-a72c-b7b696f0d7a4"
-            // }, {
-            //     name: "Meesho-113.pdf",
-            //     id: "015a8cd6-112a-4628-1s2c-b7b696f0d7a4"
-            // }];
