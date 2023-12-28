@@ -61,35 +61,6 @@ const SortLabels = () => {
         setShowFileName(true);
     };
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // // To check user login status - Import files processed in last 30 mins
-    // // This useEffect is also triggered when any file is uploaded
-    // useEffect(() => {
-    //     // runs once when the component is rendered
-    //     // This function fetches data from the backend about uploaded files, namely their file name and id.
-    //     // We can look into providing links for those files
-    //     const fetchUploadData = async () => {
-    //         // fetching file name data from backend
-    //         // Should also run when we upload a new file @@@
-    //         // @@@
-    //         // setFileData(fetchFileNames());
-    //         try {
-    //             const data = await fetchFileNames();
-    //             setFileData(data?.data);
-    //             // console.log("files: ", data.data);
-    //             console.log("filedata: ", fileData);
-    //         } catch (err) {
-    //             console.error("Error fetching file names.", err);
-    //         }
-
-    //     }
-
-    //     fetchUploadData();
-
-
-    // }, [])
-
 
     const { type } = useParams<propType>();
     return (
@@ -120,7 +91,7 @@ const SortLabels = () => {
                         <>
                             <text className="sortlabels__titleText"> Crop {type} Labels</text>
                             <text className="sortlabels__descriptionText">Crop and sort {type} PDF Labels in the order you want with the easiest {type} Label Crop tool available.</text>
-                            <Upload onUploadCompletion={handleUploadCompletion} />
+                            <Upload onUploadCompletion={handleUploadCompletion} platform={type? type.toLowerCase(): ""}/>
                         </>
                     ) : (
                         <>
@@ -141,7 +112,7 @@ const SortLabels = () => {
             <div className="sortlabels__rightContent">
                 <div className="sortlabels__columnFlex">
                     {showFileName ?
-                        (<text className="sortlabels__durationText">Previously uploaded files... </text>)
+                        (<text className="sortlabels__durationText"> Your Files<br></br>(last 30 mins.) </text>)
                         :
                         (<text className="sortlabels__durationText">File Loading... </text>)
                     }
@@ -151,7 +122,7 @@ const SortLabels = () => {
                                 return (
                                     <li className="sortlabels__fileItem"
                                         key={index}>
-                                        {fileName.slice(40, 49) + "__merged.pdf"}
+                                        <Link to={`/loading/${fileName.split("_").pop().split(".")[0].toLowerCase()}/${encodeURIComponent(fileName)}`}>{`${fileName.split('_')[2].slice(-4)}_merged_${fileName.split('_').pop()}`}</Link>
                                     </li>
                                 )
                             })

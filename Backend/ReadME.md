@@ -86,7 +86,7 @@ We provide the following API routes:
 
 ### PDF Processing
 
-- `POST /api/upload` : Upload PDFs to the server's `\public\uploads` directory after merging to one PDF. (requires authentication).
+- `POST /api/upload/:platform` : Upload PDFs to the server's `\public\uploads` directory after merging to one PDF. (requires authentication).
 - `GET /api/processedPdfNames` : Get **PDF names** uploaded by the user in last 30 minutes from `\public\uploads` directory after merging to one PDF. (requires authentication).
 - `GET /api/process-pdf/:platform/:pdfName` : Sort the given **pdfName**(PDF name to be same as in server's uploads directory) according to **platform** param and send back download link. (requires authentication).
 
@@ -95,7 +95,7 @@ We provide the following API routes:
 
 ### Upload PDF(s)
 
-- URL: `/api/upload`
+- URL: `/api/upload/:platform`
 - Method: POST
 - Authentication: Required
 
@@ -120,7 +120,7 @@ curl -X POST \
   -H "Authorization: Bearer {sessionToken}" \
   -F "pdfFiles=@file1.pdf" \
   -F "pdfFiles=@file2.pdf" \
-  https://your-api-url.com/api/upload
+  https://your-api-url.com/api/upload/:platform
 ```
 
 </details>
@@ -133,7 +133,7 @@ for (let i = 0; i < selectedFiles.length; i++) {
     formData.append('pdfFiles', selectedFiles[i]);
 }
 
-fetch('https://your-api-url.com/api/upload', {
+fetch('https://your-api-url.com/api/upload/platform', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${sessionToken}`
@@ -153,7 +153,7 @@ for (let i = 0; i < selectedFiles.length; i++) {
     formData.append('pdfFiles', selectedFiles[i]);
 }
 
-axios.post('https://your-api-url.com/api/upload', formData, {
+axios.post('https://your-api-url.com/api/upload/platform', formData, {
   headers: {
     'Authorization': `Bearer ${sessionToken}`,
     'Content-Type': 'multipart/form-data'
@@ -176,7 +176,7 @@ axios.post('https://your-api-url.com/api/upload', formData, {
 ```json
 {
   "message": "PDF uploaded successfully",
-  "pdfName": "user12345_merged_1633687423764.pdf"
+  "pdfName": "user12345_merged_1633687423764_platform.pdf"
 }
 ```
 
@@ -383,8 +383,8 @@ axios.get('https://your-api-url.com/api/processedPdfNames', {
 {
   "message": "PDF names retrieved successfully",
   "data": [
-    "user12345_merged_1633687423764.pdf",
-    "user12345_merged_1633687423765.pdf"
+    "user12345_merged_1633687423764_platform.pdf",
+    "user12345_merged_1633687423765_platform.pdf"
   ]
 }
 ```

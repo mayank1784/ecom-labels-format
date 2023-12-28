@@ -8,7 +8,7 @@ const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({ storage: storage });
 
 
-router.route("/api/upload").post(upload.array('pdfFiles',20),authorize,mergePDFs);
+router.route("/api/upload/:platform").post(upload.array('pdfFiles',20),authorize,mergePDFs);
 router.route("/api/process-pdf/:platform/:pdfName").get(authorize,sortPdf);
 router.route("/api/processedPdfNames").get(authorize,getPdfNames);
 

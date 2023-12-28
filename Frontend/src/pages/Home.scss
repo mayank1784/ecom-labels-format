@@ -13,7 +13,7 @@
     height: auto;
     width: 43vw;
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     margin-top: 10vh;
     margin-left: 4vw;
     .home__TitleText {
@@ -30,8 +30,8 @@
     }
   }
   .home__MainImage {
-    height: 40vh;
-    width: 40vw;
+    height: 50vh;
+    width: 40vh;
     object-fit: contain;
   }
 }

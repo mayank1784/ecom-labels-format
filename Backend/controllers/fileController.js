@@ -67,6 +67,7 @@ function filterArrayBySKUIDAmazon(arr) {
 async function mergePDFs(req, res) {
   try {
     const pdfFiles = req.files; // Use 'pdfFiles' as the key to extract the array of files
+    const platform = req.params.platform
 
     if (!pdfFiles) {
       return res.status(400).json({ message: "No PDF files uploaded" });
@@ -91,7 +92,7 @@ async function mergePDFs(req, res) {
     }
 
     // Generate a unique filename (e.g., timestamp-based)
-    const uniqueFilename = `${req.user.uid}_merged_${Date.now()}.pdf`;
+    const uniqueFilename = `${req.user.uid}_merged_${Date.now()}_${platform}.pdf`;
     const filePath = path.join(
       __dirname,
       "..",
@@ -135,7 +136,7 @@ async function sortPdf(req, res) {
     // If it exists, send it for download
     res.setHeader("Content-Disposition", `attachment; filename=${outputPdfName}`);
     res.setHeader("Content-Type", "application/pdf");
-    const downloadPdfStream = fs.createReadStream(downloadPath);
+    const downloadPdfStream = fs.createReadStream(outputPath);
     downloadPdfStream.pipe(res);
     return;
   }

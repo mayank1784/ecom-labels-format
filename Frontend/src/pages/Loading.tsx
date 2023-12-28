@@ -1,64 +1,48 @@
 import { useParams } from "react-router"
 import { propTypeTwo } from "../helper/helperTypes";
-import { useEffect, useRef, useState } from "react";
-
+import { useEffect, useState } from "react";
+import { processPdf } from "../helper/helperFunc";
 
 const Loading = () => {
-    const [seconds, setSeconds] = useState<number>(6);
-    const timeRef = useRef<any>();
-    const { id } = useParams<propTypeTwo>();
+    
+    const { platform, pdfName } = useParams<propTypeTwo>();
+    const [loading, setLoading] = useState<Boolean>(true);
+    const [pdfLink, setPdfLink] = useState<string>("");
+
+    
 
     useEffect(() => {
-        if (seconds == 5) {
-            timeRef.current = setInterval(() => {
-                setSeconds((prevSeconds: number) => {
-                    if (prevSeconds === 1) {
-                        clearInterval(timeRef.current);
-                        setSeconds(-2);
-                        return 0;
-                    }
-                    return prevSeconds - 1;
-                })
-            }, 1000)
-        }
-        return () => {
-            if (seconds == 0) {
-                // Just for clarity, the one inside setInterval is exected 
-                clearInterval(timeRef.current);
-            }
+        
+    
+        const fetchData = async () => {
+          try {
+            const processedPdf = await processPdf(platform, pdfName);
+    
+            const blob = new Blob([processedPdf], { type: "application/pdf" });
+            const pdfUrl = window.URL.createObjectURL(blob);
+    
+            setPdfLink(pdfUrl);
+            setLoading(false);
+          } catch (error) {
+            console.error('Error downloading processed PDF:', error);
+            // Handle error
+          }
         };
-    }, [seconds])
+    
+        fetchData();
+      }, [platform, pdfName]);
 
     return (
-        <div className="loading">
-            {
-                seconds && seconds == 6 ? (
-                    <text className="loading__contentText" onClick={() => { setSeconds(seconds - 1) }} style={{ cursor: "pointer" }}>
-                        Click to proceed
-                    </text>
-                ) : seconds == -2 ? (
-                    <text className="loading__contentText">
-                        Your pdf with ID:
-                        <span className="loading__boldSpan">
-                            {id}
-                        </span>
-                        ... is ready for download!
-                        <br />
-                        <br />
-                        Click the link below
-                    </text>
-                ) : (
-                    <text className="loading__contentText">
-                        Almost there...
-                        <span className="loading__boldSpan">
-                            {seconds}
-                        </span>
-                    </text>
-                )
-            }
-            {/* ID, not visible here */}
-        </div>
-    )
+    <div>
+      {loading ? (
+        <p>Your PDF is loading. Please wait...</p>
+      ) : (
+        <a href={pdfLink} download="processed_pdf.pdf">
+          Download Processed PDF
+        </a>
+      )}
+    </div>
+    );
 }
 
 export default Loading

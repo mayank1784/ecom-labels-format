@@ -11,14 +11,14 @@ import { userDataType } from "./helperTypes";
 const sessionToken = Cookies.get("sessionToken");
 
 // Uploads file to backend
-export const handleUploadClick = async (selectedFiles: File[]) => {
+export const handleUploadClick = async (selectedFiles: File[], platform: string) => {
   const formData = new FormData();
   selectedFiles.forEach((file: File) => {
     formData.append("pdfFiles", file);
   });
   console.log(formData);
   try {
-    const response = await axios.post("/api/upload", formData, {
+    const response = await axios.post(`/api/upload/${platform}`, formData, {
       // changed the link here
       headers: {
         Authorization: `Bearer ${sessionToken}`,
@@ -78,3 +78,20 @@ export const fetchUserData = async () => {
   });
   return userData;
 };
+
+export const processPdf = async (platform: string, pdfName: string): Promise<Blob> => {
+  try {
+
+      const response = await axios.get(`/api/process-pdf/${platform}/${pdfName}`, {
+          headers: {
+              Authorization: `Bearer ${sessionToken}`,
+          },
+          responseType: "blob", // Set the response type to 'blob' for file download
+      });
+
+      return response.data;
+  } catch (error) {
+      throw error;
+  }
+};
+

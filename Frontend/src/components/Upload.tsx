@@ -9,9 +9,10 @@ import { handleUploadClick } from "../helper/helperFunc";
 
 interface FileUploaderProps {
   onUploadCompletion: () => void; // Specify the type for onUploadCompletion prop
+  platform: string;
 }
 
-function FileUploader({ onUploadCompletion }: FileUploaderProps) {
+function FileUploader({ onUploadCompletion, platform }: FileUploaderProps) {
   // Set file data for uploading
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -74,7 +75,7 @@ function FileUploader({ onUploadCompletion }: FileUploaderProps) {
   const handleUploadClick__updated = async () => {
     if (selectedFiles.length > 0) {
       // Imported from helper Function
-      await handleUploadClick(selectedFiles);
+      await handleUploadClick(selectedFiles,platform);
       // Notify parent component about upload completion
       onUploadCompletion();
       setSelectedFiles([]);
