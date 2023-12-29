@@ -107,8 +107,19 @@
       // prolly need to add durationText
       .sortlabels__filesList {
         height: 50vh;
-        overflow-y: scroll;
-        cursor: pointer;
+        overflow-y: auto;
+        // cursor: pointer;
+        &::-webkit-scrollbar-track {
+          background-color: rgba($text--grey, 0.25);
+        }
+        &::-webkit-scrollbar{
+          width: 4px;
+          background-color: rgba($text--grey, 0.25);
+        }
+        &::-webkit-scrollbar-thumb{
+          background-color: rgba($backgroundAlt--color, 0.5);
+          cursor: grab;
+        }
         .sortlabels__fileItem {
           font-size: 0.8rem;
           font-family: Tahoma;

@@ -48,7 +48,7 @@ function FileUploader({ onUploadCompletion, platform }: FileUploaderProps) {
       if (totalSize + newFilesSize > 25 * 1024 * 1024) {
         toast.error('The total size of selected files cannot exceed 25 MB.', {
           position: "bottom-center",
-          autoClose: 3000,
+          autoClose: 3000,  
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

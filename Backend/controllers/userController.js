@@ -15,7 +15,7 @@ exports.loginUser = async (req, res) => {
         photoURL: userData.photoURL,
       });
     }
-    const sessionToken = jwt.sign({ user: userData }, process.env.JWT_SECRET);
+    const sessionToken = jwt.sign({ user: userData }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.status(200).json({ sessionToken });
   } catch (err) {
     console.error("Google Login Error:", error);

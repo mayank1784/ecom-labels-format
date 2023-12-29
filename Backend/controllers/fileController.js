@@ -223,7 +223,7 @@ async function sortPdf(req, res) {
     const modifiedPdfStream = fs.createReadStream(outputPath);
     modifiedPdfStream.pipe(res);
   } catch (err) {
-    console.error("Error processing PDF:", error);
+    console.error("Error processing PDF:", err);
     res.status(500).json({ message: "Error processing PDF" });
   }
 }
