@@ -136,6 +136,11 @@
           // border: 2px solid $backgroundAlt2--color;
           background-color: $backgroundAlt--color;
         }
+        a{
+          text-decoration: none;
+        &:hover{
+          color: $text--white;
+        }}
       }
     }
     .sortlabels__durationText {

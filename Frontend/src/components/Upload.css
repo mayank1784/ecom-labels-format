@@ -1,12 +1,12 @@
 .upload {
   position: relative;
   width: 400px;
-  min-height: 400px;
+  height: 50vh;
   box-sizing: border-box;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   padding-bottom: 20px;
-  background: #fff;
+  background: #ffffff;
   animation: fadeup 0.5s 0.5s ease both;
   transform: translateY(20px);
   opacity: 0;
@@ -18,7 +18,7 @@
   text-align: center;
 }
 .upload .upload-files header p {
-  color: #fff;
+  color: #ffffff;
   font-size: 40px;
   margin: 0;
   padding: 50px 0;
@@ -42,7 +42,7 @@
 }
 .upload .upload-files .body i {
   font-size: 65px;
-  color: lightgray;
+  color: #767b91;
 }
 .upload .upload-files .body p {
   font-size: 14px;
@@ -62,15 +62,15 @@
   border: dashed 2px #04a7ab;
 }
 .upload .upload-files .body.active i {
-  box-shadow: 0 0 0 -3px #fff, 0 0 0 lightgray, 0 0 0 -3px #fff, 0 0 0 lightgray;
+  box-shadow: 0 0 0 -3px #ffffff, 0 0 0 #767b91, 0 0 0 -3px #ffffff, 0 0 0 #767b91;
   animation: file 0.5s ease both;
 }
 @keyframes file {
   50% {
-    box-shadow: -8px 8px 0 -3px #fff, -8px 8px 0 lightgray, -8px 8px 0 -3px #fff, -8px 8px 0 lightgray;
+    box-shadow: -8px 8px 0 -3px #ffffff, -8px 8px 0 #767b91, -8px 8px 0 -3px #ffffff, -8px 8px 0 #767b91;
   }
   75%, 100% {
-    box-shadow: -8px 8px 0 -3px #fff, -8px 8px 0 lightgray, -16px 16px 0 -3px #fff, -16px 16px 0 lightgray;
+    box-shadow: -8px 8px 0 -3px #ffffff, -8px 8px 0 #767b91, -16px 16px 0 -3px #ffffff, -16px 16px 0 #767b91;
   }
 }
 .upload .upload-files .body.active .pointer-none {
@@ -113,14 +113,14 @@
   text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 300px;
+  height: 34vh;
 }
 .upload .upload-files footer .list-files::-webkit-scrollbar-track {
-  background-color: rgba(211, 211, 211, 0.25);
+  background-color: rgba(118, 123, 145, 0.25);
 }
 .upload .upload-files footer .list-files::-webkit-scrollbar {
   width: 4px;
-  background-color: rgba(211, 211, 211, 0.25);
+  background-color: rgba(118, 123, 145, 0.25);
 }
 .upload .upload-files footer .list-files::-webkit-scrollbar-thumb {
   background-color: rgba(4, 167, 171, 0.5);
@@ -146,7 +146,7 @@
 .upload .upload-files footer .list-files .file .progress {
   width: 175px;
   height: 5px;
-  border: solid 1px lightgray;
+  border: solid 1px #767b91;
   border-radius: 2px;
   background: linear-gradient(to left, rgba(4, 167, 171, 0.2), rgba(4, 167, 171, 0.8)) no-repeat;
   background-size: 100% 100%;

@@ -4,6 +4,7 @@ const path = require("path");
 const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
 const PDFParse = require("pdf-parse");
 const PDFJS = require("pdfjs-dist/build/pdf.js");
+const { PDFNet } = require("@pdftron/pdfnet-node");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,7 +68,7 @@ function filterArrayBySKUIDAmazon(arr) {
 async function mergePDFs(req, res) {
   try {
     const pdfFiles = req.files; // Use 'pdfFiles' as the key to extract the array of files
-    const platform = req.params.platform
+    const platform = req.params.platform;
 
     if (!pdfFiles) {
       return res.status(400).json({ message: "No PDF files uploaded" });
@@ -79,7 +80,7 @@ async function mergePDFs(req, res) {
     // Iterate through the uploaded PDF files
     for (const pdfFile of pdfFiles) {
       const pdfBytes = pdfFile.buffer; // Access the 'buffer' property to get file data
-      const pdfDoc = await PDFDocument.load(pdfBytes);
+      const pdfDoc = await PDFDocument.load(pdfBytes,{ignoreEncryption: true});
 
       // Append each page to the merged PDF document
       const copiedPages = await mergedPDF.copyPages(
@@ -92,7 +93,9 @@ async function mergePDFs(req, res) {
     }
 
     // Generate a unique filename (e.g., timestamp-based)
-    const uniqueFilename = `${req.user.uid}_merged_${Date.now()}_${platform}.pdf`;
+    const uniqueFilename = `${
+      req.user.uid
+    }_merged_${Date.now()}_${platform}.pdf`;
     const filePath = path.join(
       __dirname,
       "..",
@@ -120,7 +123,10 @@ async function mergePDFs(req, res) {
 async function sortPdf(req, res) {
   const platform = req.params.platform;
   const pdfName = req.params.pdfName;
-  const outputPdfName = `${pdfName.substring(0,pdfName.lastIndexOf(".pdf"))}_sorted_${platform}.pdf`;
+  const outputPdfName = `${pdfName.substring(
+    0,
+    pdfName.lastIndexOf(".pdf")
+  )}_sorted_${platform}.pdf`;
   // Define the paths to the merged PDF and the output PDF
   const foundPdf = path.join(__dirname, "..", "public", "uploads", pdfName);
   const outputPath = path.join(
@@ -134,7 +140,10 @@ async function sortPdf(req, res) {
   // Check if a processed PDF already exists
   if (fs.existsSync(outputPath)) {
     // If it exists, send it for download
-    res.setHeader("Content-Disposition", `attachment; filename=${outputPdfName}`);
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=${outputPdfName}`
+    );
     res.setHeader("Content-Type", "application/pdf");
     const downloadPdfStream = fs.createReadStream(outputPath);
     downloadPdfStream.pipe(res);
@@ -216,9 +225,60 @@ async function sortPdf(req, res) {
       }
     }
     const sortedPdfBytes = await sortedPdf.save();
+
     fs.writeFileSync(outputPath, sortedPdfBytes);
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    if (platform != "amazon") {
+      await PDFNet.initialize(
+        "demo:1696681505415:7cef259c0300000000284d26b8d9353df9ad931f1d36c1c432b6231b2d"
+      );
+      try {
+        const doc = await PDFNet.PDFDoc.createFromFilePath(outputPath);
+        let cropParams;
+        if (platform === "flipkart") {
+          cropParams = {
+            x1: 187.9,
+            y1: 460.78,
+            x2: 405.4,
+            y2: 815.08,
+          };
+        } else if (platform === "meesho") {
+          cropParams = {
+            x1: 0,
+            y1: 414.18,
+            x2: 594.72,
+            y2: 841.68,
+          };
+        }
+        const page_num = await doc.getPageCount();
+        for (let i = 1; i <= page_num; ++i) {
+          const page = await doc.getPage(i);
+          page.setCropBox(
+            new PDFNet.Rect(
+              cropParams.x1,
+              cropParams.y1,
+              cropParams.x2,
+              cropParams.y2
+            )
+          );
+        }
+        await doc.save(outputPath, PDFNet.SDFDoc.SaveOptions.e_linearized);
+        console.log("PDF cropped successfully!");
+        
+      } catch (err) {
+        console.error(err);
+        throw err;
+      }finally{
+        PDFNet.shutdown();
+      }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     // Send the modified PDF as a downloadable response
-    res.setHeader("Content-Disposition", `attachment; filename=${outputPdfName}`);
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=${outputPdfName}`
+    );
     res.setHeader("Content-Type", "application/pdf");
     const modifiedPdfStream = fs.createReadStream(outputPath);
     modifiedPdfStream.pipe(res);
@@ -258,12 +318,10 @@ async function getPdfNames(req, res) {
     // Extract and send only the sorted file names
     const sortedFileNames = sortedFiles.map((file) => file.name);
 
-    res
-      .status(200)
-      .json({
-        message: "PDF names retrieved successfully",
-        data: sortedFileNames,
-      });
+    res.status(200).json({
+      message: "PDF names retrieved successfully",
+      data: sortedFileNames,
+    });
   });
 }
 

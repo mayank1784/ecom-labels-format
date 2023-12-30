@@ -4,7 +4,8 @@
 .upload {
   position: relative;
   width: 400px;
-  min-height: 400px;
+  // min-height: 400px;
+  height: 50vh;
   box-sizing: border-box;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(black, 0.2);
@@ -136,7 +137,8 @@
         text-align: center;
         overflow-x: hidden;
         overflow-y: auto;
-        max-height: 300px;
+        // max-height: 300px;
+        height: 34vh;
         &::-webkit-scrollbar-track {
           background-color: rgba($text--grey, 0.25);
         }
@@ -199,6 +201,7 @@
         right: 0;
         bottom: 20px;
         margin: auto;
+        
         border: solid 1px $backgroundAlt--color;
         color: $backgroundAlt--color;
         background: transparent;

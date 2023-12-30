@@ -3,7 +3,7 @@ import { propTypeTwo } from "../helper/helperTypes";
 import { useEffect, useState } from "react";
 import { processPdf } from "../helper/helperFunc";
 import { useNavigate } from "react-router-dom";
-
+import "./Loading.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,6 +17,12 @@ const Loading = () => {
   const [pdfLink, setPdfLink] = useState<string>("");
 
   const navigate = useNavigate();
+
+  const handleDownload = () => {
+    // Redirect to previous page when download link is clicked
+    alert("File Download started.")
+    navigate(-1);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -55,14 +61,37 @@ const Loading = () => {
   }, [platform, pdfName, navigate]);
 
   return (
-    <div>
+    <div className="loadingContainer">
       <ToastContainer />
       {loading ? (
-        <p>Your PDF is loading. Please wait...</p>
+        <>
+        
+        
+        <div id="wifi-loader">
+    <svg className="circle-outer" viewBox="0 0 86 86">
+        <circle className="back" cx="43" cy="43" r="40"></circle>
+        <circle className="front" cx="43" cy="43" r="40"></circle>
+        <circle className="new" cx="43" cy="43" r="40"></circle>
+    </svg>
+    <svg className="circle-middle" viewBox="0 0 60 60">
+        <circle className="back" cx="30" cy="30" r="27"></circle>
+        <circle className="front" cx="30" cy="30" r="27"></circle>
+    </svg>
+    <svg className="circle-inner" viewBox="0 0 34 34">
+        <circle className="back" cx="17" cy="17" r="14"></circle>
+        <circle className="front" cx="17" cy="17" r="14"></circle>
+    </svg>
+</div>
+<h2>Your PDF is loading. Please wait...</h2>
+</>
       ) : (
-        <a href={pdfLink} download="LS_Processed.pdf">
+        <>
+        <button className="download-btn">
+        <a href={pdfLink} download="LS_Processed.pdf" onClick={handleDownload}>
           Download Processed PDF
-        </a>
+        </a></button>
+       
+        </>
       )}
     </div>
   );

@@ -89,8 +89,18 @@
 }
 .sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList {
   height: 50vh;
-  overflow-y: scroll;
-  cursor: pointer;
+  overflow-y: auto;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList::-webkit-scrollbar-track {
+  background-color: rgba(118, 123, 145, 0.25);
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList::-webkit-scrollbar {
+  width: 4px;
+  background-color: rgba(118, 123, 145, 0.25);
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList::-webkit-scrollbar-thumb {
+  background-color: rgba(4, 167, 171, 0.5);
+  cursor: grab;
 }
 .sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList .sortlabels__fileItem {
   font-size: 0.8rem;
@@ -104,6 +114,12 @@
 .sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList .sortlabels__fileItem:hover {
   color: #f3f3f3;
   background-color: #04a7ab;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList a {
+  text-decoration: none;
+}
+.sortlabels .sortlabels__rightContent .sortlabels__columnFlex .sortlabels__filesList a:hover {
+  color: #f3f3f3;
 }
 .sortlabels .sortlabels__rightContent .sortlabels__linkSpan {
   color: blue;
