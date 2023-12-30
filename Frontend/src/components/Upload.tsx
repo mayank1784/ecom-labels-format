@@ -44,9 +44,9 @@ function FileUploader({ onUploadCompletion, platform }: FileUploaderProps) {
       const totalSize = selectedFiles.reduce((acc, file) => acc + file.size, 0);
       const newFilesSize = Array.from(files).reduce((acc, file) => acc + file.size, 0);
 
-      // Check if adding these files exceeds the maximum total size (25 MB)
-      if (totalSize + newFilesSize > 25 * 1024 * 1024) {
-        toast.error('The total size of selected files cannot exceed 25 MB.', {
+      // Check if adding these files exceeds the maximum total size (10 MB)
+      if (totalSize + newFilesSize > 10 * 1024 * 1024) {
+        toast.error('The total size of selected files cannot exceed 10 MB.', {
           position: "bottom-center",
           autoClose: 3000,  
           hideProgressBar: false,

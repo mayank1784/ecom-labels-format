@@ -15,15 +15,40 @@ const SortLabels = () => {
   const [fileData, setFileData] = useState<pdfNameDataType>();
   // This useState has chance to be redundant
   const [showFileName, setShowFileName] = useState<boolean>(true);
-
+  const { type } = useParams<propType>();
   // Change the features here @@@
-  const features = [
+  let features = [
     "Sorted by SKU and Qty",
-    "Add SKU - QTY in Lable",
+    "Add SKU - QTY in Lables",
     "Remove extra blank pages",
     "Merge and process multiple labels",
   ];
-
+  switch (type) {
+    case "Amazon":
+      features = [
+        "Sorted by SKU",
+        "Add SKU - QTY in shipping Labels",
+        "Remove invoices",
+        "Merge and process multiple files",
+      ];
+      break;
+    case "Flipkart":
+      features = [
+        "Sort Labels on basis of SKU ID",
+        "Merge and process multiple files",
+        'Label cropped in 3" x 4" size stable for thermal printing',
+      ];
+      break;
+    case "Meesho":
+      features = [
+        "Merge and process multiple files",
+        "Sorted on basis of SKU ID",
+        "Shipping Label cropped from invoice",
+      ];
+      break;
+    default:
+      break;
+  }
   // Hooks
 
   // Run fetchUploadData after initial load and every minute
@@ -64,7 +89,6 @@ const SortLabels = () => {
     setShowFileName(true);
   };
 
-  const { type } = useParams<propType>();
   return (
     <div className="sortlabels">
       <div className="sortlabels__leftContent">
