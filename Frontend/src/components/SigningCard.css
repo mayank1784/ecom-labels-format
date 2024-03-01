@@ -1,0 +1,70 @@
+.SigningCard {
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  padding-top: 10vh;
+}
+.SigningCard .SigningCard__container {
+  margin: auto;
+  height: 450px;
+  width: 300px;
+  padding: 15px 10px 20px 10px;
+  border: 2px solid #000000;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+}
+.SigningCard .SigningCard__container span {
+  font-family: Arial;
+  color: #0e111f;
+  font-weight: 600;
+  font-size: 34px;
+  margin-bottom: 35px;
+}
+.SigningCard .SigningCard__container .SigningCard__logo {
+  margin-bottom: 20px;
+}
+.SigningCard .SigningCard__container .SigningCard__button {
+  margin: 0px 7px 10px 7px;
+  padding: 9px 36px;
+  border-radius: 12px;
+  font-family: sans-serif;
+  font-weight: 500;
+  color: #f3f3f3;
+  font-size: 18px;
+  background-color: #04a7ab;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.SigningCard .SigningCard__container .SigningCard__button .SigningCard__googleLogo {
+  background-color: inherit;
+  padding-right: 12px;
+}
+.SigningCard .SigningCard__container .SigningCard__button:hover {
+  transition-duration: 100ms;
+  color: #04a7ab;
+  background-color: #f3f3f3;
+}
+.SigningCard .SigningCard__container .SigningCard__button:hover .SigningCard__googleLogo {
+  background-color: inherit;
+}
+.SigningCard .SigningCard__container hr {
+  width: 85%;
+  margin: 17px 0px;
+}
+.SigningCard .SigningCard__container .SigningCard__fillerText {
+  font-family: sans-serif;
+  color: #0e111f;
+  font-size: 14px;
+  padding: 0px 8px;
+}
+.SigningCard .SigningCard__container .SigningCard__fillerText a {
+  text-decoration: none;
+  color: #04a7ab;
+  font-weight: 600;
+}/*# sourceMappingURL=SigningCard.css.map */

@@ -1,0 +1,79 @@
+@import "../stylesheets/Variables.scss";
+
+.nav {
+  height: 9vh;
+  // padding-bottom: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  font-size: 26px;
+  font-family: Tahoma;
+  background-color: $backgroundAlt--color;
+  .nav__logoImage {
+    position: absolute;
+    top: 0px;
+    left: 16px;
+    height: 9vh;
+    width: auto;
+    padding: 0px 6px;
+    object-fit: contain;
+    background-color: inherit;
+    cursor: pointer;
+  }
+  .nav__companyText {
+    position: absolute;
+    top: 2vh;
+    left: calc(9vh + 35px);
+    padding: 5px 3px;
+    font-family: Franklin Gothic Medium;
+    font-size: 4vh;
+    background-color: inherit;
+    color: $text--white;
+    cursor: pointer;
+  }
+  text {
+    @extend .navText--style;
+  }
+  text:hover {
+    transition-duration: 200ms;
+    border-bottom: 5px solid $text--white;
+  }
+  .nav__logInText {
+    border: 1.5px solid $border--color;
+    color: $backgroundAlt--color;
+    background-color: $text--white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+  }
+  .nav__logInText:hover {
+    transition-duration: 100ms;
+    border-color: $background--color;
+    background-color: $backgroundAlt--color;
+    color: $background--color;
+  }
+  .nav__toolsDropdown {
+    @extend .navText--style;
+    margin-right: 30px;
+    display: flex; // slaps both at the top, text too
+    justify-content: center;
+    .nav__downArrow {
+      background-color: inherit;
+    }
+  }
+}
+
+// for @extend
+
+.navText--style {
+  margin-right: 15px;
+  font-size: 2.5vh;
+  margin-top: 3.2vh;
+  padding: 0px 5px 2.3vh 5px;
+  color: $text--white;
+  background-color: inherit;
+  cursor: pointer;
+  border-bottom: 2px solid $backgroundAlt--color;
+}

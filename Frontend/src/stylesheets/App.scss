@@ -1,0 +1,21 @@
+@import "./Variables.scss";
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.main {
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  .main__waveSvg {
+    img {
+      display: block;
+      max-width: 100%;
+    }
+  }
+}

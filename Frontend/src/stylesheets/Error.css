@@ -1,0 +1,13 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+}
+.error .error__title {
+  font-family: Tahoma;
+  margin-bottom: 20px;
+}
+.error .error__message {
+  font-family: Arial;
+}/*# sourceMappingURL=Error.css.map */

@@ -1,0 +1,35 @@
+.home {
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.home .home__TextContainer {
+  height: auto;
+  width: 43vw;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+  margin-left: 4vw;
+}
+.home .home__TextContainer .home__TitleText {
+  font-size: 36px;
+  font-family: Tahoma;
+  color: #000000;
+}
+.home .home__TextContainer .home__DescriptionText {
+  width: 40vw;
+  padding-top: 20px;
+  font-size: 16px;
+  font-family: Arial;
+  color: #767b91;
+}
+.home .home__MainImage {
+  height: 40vh;
+  width: 40vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+}/*# sourceMappingURL=Home.css.map */
